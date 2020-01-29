@@ -2,6 +2,8 @@
 
 This game is developed in AY2019-20 Sem 2 for CZ4001 Virtual and Augmented Reality.
 
+![hunting wallpaper](Hunting/Assets/Wallpaper/Deer-Hunting-Wallpapers.jpg)
+
 ## Versions
 
 - Unity: 2018.3.1f1
