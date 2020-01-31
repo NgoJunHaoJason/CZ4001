@@ -12,8 +12,8 @@ This game is developed in AY2019-20 Sem 2 for CZ4001 Virtual and Augmented Reali
 
 after cloning:
 
-1. create a folder named 'Library' under Assets
-2. copy the following folders from 'Hunting' (from NTULearn) into Library:
+1. [configure Unity for version control](https://thoughtbot.com/blog/how-to-git-with-unity)
+2. copy the following folders from 'Hunting' (from NTULearn) into the folder 'Library':
     - [BFW]SimpleDynamicClouds
     - Animal Pack Deluxe
     - Free Island Collection
