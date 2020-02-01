@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private int jumpingForce = 3;
 
     [SerializeField]
-    private int cameraHorizontalSensitivity = 2;
+    private int cameraHorizontalSensitivity = 4;
 
     [SerializeField]
     private int cameraVerticalSensitivity = 3;
