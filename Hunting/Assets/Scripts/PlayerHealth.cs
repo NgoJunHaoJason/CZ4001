@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using UnityEngine.SceneManagement;
 
 
 public class PlayerHealth : MonoBehaviour
 {
     public int startingHealth = 100;
-    public int currentHealth;
+    private int currentHealth;
     public Slider healthSlider;
+
+    [SerializeField]
+    private Text healthValueText;
+
     public Image damageImage;
     public AudioClip deathClip;
     public float flashSpeed = 5f;
@@ -20,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
     bool isDead;
     bool damaged;
 
+    public bool IsDead { get => isDead; }
 
     void Awake()
     {
@@ -52,8 +56,13 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= amount;
 
         healthSlider.value = currentHealth;
+        healthValueText.text = currentHealth.ToString();
 
         playerAudio.Play();
+
+        if (Debug.isDebugBuild)
+            Debug.Log("Player took damage and lost <color=Red>" + 
+                amount.ToString() + "</color> health.");
 
         if (currentHealth <= 0 && !isDead)
         {
