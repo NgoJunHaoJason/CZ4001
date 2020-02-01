@@ -31,3 +31,8 @@ after cloning:
 ## Building / Deploying
 
 TODO
+
+## Resources used
+
+- [birds](https://assetstore.unity.com/packages/3d/characters/animals/living-birds-15649)
+- [reticle sprite](https://www.hiclipart.com/free-transparent-background-png-clipart-mryvr)
