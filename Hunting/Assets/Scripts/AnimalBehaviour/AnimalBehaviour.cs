@@ -44,6 +44,11 @@ public abstract class AnimalBehaviour : MonoBehaviour
     protected float movementTimer;
     protected float chaseTimer;
 
+    protected float attackTimer = 0;
+
+    [SerializeField]
+    protected float attackInterval = 2;
+
 
     // Start is called before the first frame update
     void Start()
@@ -184,12 +189,23 @@ public abstract class AnimalBehaviour : MonoBehaviour
         if (isPlayer)
         {
             PlayerHealth playerHealth = reach.playerInRange.GetComponentInChildren<PlayerHealth>();
+            if (playerHealth is null)
+            {
+                Debug.Log("Player is missing PlayerHealth");
+            }
+            else
+            {
+                if (!playerHealth.IsDead)
+                    playerHealth.TakeDamage(10);
+            }
         }
         else 
         {
             AnimalHealth animalHealth = reach.herbivoreInRange.GetComponentInChildren<AnimalHealth>();
             animalHealth.TakeDamageFrom(gameObject);
         }
+
+        attackTimer = 0;
     }
 
     public void Die()

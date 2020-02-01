@@ -24,11 +24,17 @@ public class WolfBehaviour : AnimalBehaviour
         }
         else if (reach.herbivoreInRange)
         {
-            Attack(false);
+            attackTimer += Time.deltaTime;
+
+            if (attackTimer >= attackInterval)
+                Attack(false);
         }
         else if (reach.playerInRange)
         {
-            Attack(true);
+            attackTimer += Time.deltaTime;
+
+            if (attackTimer >= attackInterval)
+                Attack(true);
         }
         else if (sight.deadAnimalInRange)
         {
