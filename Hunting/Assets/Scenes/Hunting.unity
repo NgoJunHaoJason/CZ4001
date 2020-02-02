@@ -2224,7 +2224,7 @@ MonoBehaviour:
   startingHealth: 100
   healthValueText: {fileID: 1392113817}
   healthSlider: {fileID: 1876340628}
-  deathAudioClip: {fileID: 0}
+  deathAudioClip: {fileID: 8300000, guid: 5afca42ac0b79634ead8c777e0adcc0c, type: 3}
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
   damageImage: {fileID: 267387195}

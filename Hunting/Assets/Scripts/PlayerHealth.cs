@@ -16,10 +16,10 @@ public class PlayerHealth : MonoBehaviour
 
     private int currentHealth;
 
-    private AudioSource playerAudio = null;
+    private AudioSource playerAudioSource = null;
 
     private bool isDead = false;
-    private bool damaged = false;
+    private bool isTakingDamage = false;
 
     # endregion
 
@@ -44,7 +44,7 @@ public class PlayerHealth : MonoBehaviour
     private Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
     [SerializeField]
-    private Image damageImage;
+    private Image damageImage = null;
 
     # endregion
 
@@ -52,24 +52,52 @@ public class PlayerHealth : MonoBehaviour
 
     void Awake()
     {
-        playerAudio = GetComponent<AudioSource>();
-        //playerMovement = GetComponent<PlayerMovement>();
-        //playerShooting = GetComponentInChildren <PlayerShooting> ();
+        playerAudioSource = GetComponent<AudioSource>();
         currentHealth = startingHealth;
+
+        if (Debug.isDebugBuild)
+        {
+            if (healthValueText == null)
+                Debug.LogError(
+                    "Player healthValueText is not set in Unity editor", 
+                    healthValueText
+                );
+
+            if (healthSlider == null)
+                Debug.LogError(
+                    "Player healthSlider is not set in Unity editor", 
+                    healthSlider
+                );
+
+            if (deathAudioClip == null)
+                Debug.LogError(
+                    "Player deathAudioClip is not set in Unity editor", 
+                    deathAudioClip
+                );
+
+            if (damageImage == null)
+                Debug.LogError(
+                    "Player damageImage is not set in Unity editor", 
+                    damageImage
+                );
+        }
     }
 
 
     void FixedUpdate()
     {
-        if (damaged)
-        {
+        if (isTakingDamage)
             damageImage.color = flashColour;
-        }
         else
         {
-            damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
+            damageImage.color = Color.Lerp(
+                damageImage.color, 
+                Color.clear, 
+                flashSpeed * Time.deltaTime
+            );
         }
-        damaged = false;
+        
+        isTakingDamage = false;
     }
 
     # endregion
@@ -80,8 +108,8 @@ public class PlayerHealth : MonoBehaviour
     {
         isDead = true;
 
-        playerAudio.clip = deathAudioClip;
-        playerAudio.Play();
+        playerAudioSource.clip = deathAudioClip;
+        playerAudioSource.Play();
     }
 
     # endregion
@@ -90,23 +118,21 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        damaged = true;
+        isTakingDamage = true;
 
         currentHealth -= amount;
 
         healthSlider.value = currentHealth;
         healthValueText.text = currentHealth.ToString();
 
-        playerAudio.Play();
+        playerAudioSource.Play();
 
         if (Debug.isDebugBuild)
             Debug.Log("Player took damage and lost <color=Red>" + 
                 amount.ToString() + "</color> health.");
 
         if (currentHealth <= 0 && !isDead)
-        {
             Die();
-        }
     }
 
     public void RestartLevel()

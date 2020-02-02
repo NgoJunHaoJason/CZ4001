@@ -51,8 +51,8 @@ public class PlayerController : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody>();
         playerCamera = GetComponentInChildren<Camera>();
 
-        if (playerCamera == null && Debug.isDebugBuild)
-            Debug.LogError("No Camera is attached to the Player");
+        if (Debug.isDebugBuild && playerCamera == null)
+            Debug.LogError("No Camera is attached to the Player", playerCamera);
     }
 
     void FixedUpdate()
