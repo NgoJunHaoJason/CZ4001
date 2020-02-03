@@ -1,14 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
 
 public class AnimalSight : MonoBehaviour
 {
     public GameObject playerInRange = null;
-    public List<GameObject> herbivoresInRange = new List<GameObject>();
-    public List<GameObject> carnivoresInRange = new List<GameObject>();
+
     public GameObject deadAnimalInRange = null;
+
+    public List<GameObject> herbivoresInRange = new List<GameObject>();
+
+    public List<GameObject> carnivoresInRange = new List<GameObject>();
 
     private void OnTriggerStay(Collider other)
     {
@@ -65,5 +67,4 @@ public class AnimalSight : MonoBehaviour
             carnivoresInRange.Remove(other.gameObject);
 
     }
-
 }

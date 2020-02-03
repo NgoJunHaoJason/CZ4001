@@ -12,7 +12,7 @@ public class AggressiveHerbivoreBehaviour : AggressiveAnimalBehaviour
         {
             Die();
         }
-        else if (reach.PlayerInRange != null && health.attackedByPlayer)
+        else if (reach.HasPlayerInRange && health.attackedByPlayer)
         {
             if (health.ShouldFlee())
                 Flee();

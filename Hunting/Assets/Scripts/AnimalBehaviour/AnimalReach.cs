@@ -6,8 +6,14 @@ public class AnimalReach : MonoBehaviour
     # region Properties
 
     public GameObject PlayerInRange { get => playerInRange; }
+    
+    public bool HasPlayerInRange { get => playerInRange != null; }
+    
     public GameObject HerbivoreInRange { get => herbivoreInRange; }
-    public GameObject DeadAnimalInRange { get => deadAnimalInRange; }
+
+    public bool HasHerbivoreInRange { get => herbivoreInRange != null; }
+
+    public bool HasDeadAnimalInRange { get => deadAnimalInRange != null; }
 
     # endregion
 
