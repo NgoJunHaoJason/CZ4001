@@ -16,27 +16,19 @@ public class BearBehaviour : AggressiveAnimalBehaviour
         {
             Flee();
         }
-        else if (reach.deadAnimalInRange)
+        else if (reach.DeadAnimalInRange != null)
         {
             Eat();
         }
-        else if (reach.herbivoreInRange)
+        else if (reach.PlayerInRange != null || reach.HerbivoreInRange != null)
         {
             if (attackTimer >= attackInterval)
             {
-                Attack(false);
+                Attack(reach.PlayerInRange != null);
                 attackTimer = 0;
             }
         }
-        else if (reach.playerInRange)
-        {
-            if (attackTimer >= attackInterval)
-            {
-                Attack(true);
-                attackTimer = 0;
-            }
-        }
-        else if (sight.deadAnimalInRange)
+        else if (sight.deadAnimalInRange != null)
         {
             Chase(sight.deadAnimalInRange);
         }
@@ -44,11 +36,10 @@ public class BearBehaviour : AggressiveAnimalBehaviour
         {
             Chase(sight.herbivoresInRange[0]);
         }
-        else if (sight.playerInRange)
+        else if (sight.playerInRange != null)
         {
             Chase(sight.playerInRange);
         }
-        
         else if (!destinationReached)
         {
             if (fleeing)

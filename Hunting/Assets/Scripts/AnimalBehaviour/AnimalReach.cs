@@ -3,10 +3,23 @@ using VRTK;
 
 public class AnimalReach : MonoBehaviour
 {
-    public GameObject playerInRange = null;
-    public GameObject herbivoreInRange = null;
-    public GameObject deadAnimalInRange = null;
+    # region Properties
 
+    public GameObject PlayerInRange { get => playerInRange; }
+    public GameObject HerbivoreInRange { get => herbivoreInRange; }
+    public GameObject DeadAnimalInRange { get => deadAnimalInRange; }
+
+    # endregion
+
+    # region Serialize Fields
+
+    private GameObject playerInRange = null;
+    private GameObject herbivoreInRange = null;
+    private GameObject deadAnimalInRange = null;
+
+    # endregion
+
+    # region Private Methods
 
     private void OnTriggerStay(Collider other)
     {
@@ -46,8 +59,6 @@ public class AnimalReach : MonoBehaviour
         {
              herbivoreInRange = other.gameObject;
         }
-
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -66,7 +77,7 @@ public class AnimalReach : MonoBehaviour
             deadAnimalInRange = null;
             return;
         }
-
     }
 
+    # endregion
 }

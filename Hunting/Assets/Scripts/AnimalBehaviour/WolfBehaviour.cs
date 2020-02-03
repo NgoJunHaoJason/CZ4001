@@ -13,29 +13,23 @@ public class WolfBehaviour : AggressiveAnimalBehaviour
         {
             Die();
         }
-        else if (health.IsRecentlyDamaged() && !sight.playerInRange)
+        else if (health.IsRecentlyDamaged() && sight.playerInRange == null)
         {
             Flee();
         }
-        else if (reach.deadAnimalInRange)
+        else if (reach.DeadAnimalInRange != null)
         {
             Eat();
         }
-        else if (reach.herbivoreInRange)
+        else if (reach.PlayerInRange != null || reach.HerbivoreInRange != null)
         {
-            attackTimer += Time.deltaTime;
-
             if (attackTimer >= attackInterval)
-                Attack(false);
+            {
+                Attack(reach.PlayerInRange != null);
+                attackTimer = 0;
+            }
         }
-        else if (reach.playerInRange)
-        {
-            attackTimer += Time.deltaTime;
-
-            if (attackTimer >= attackInterval)
-                Attack(true);
-        }
-        else if (sight.deadAnimalInRange)
+        else if (sight.deadAnimalInRange != null)
         {
             Chase(sight.deadAnimalInRange);
         }
@@ -43,11 +37,10 @@ public class WolfBehaviour : AggressiveAnimalBehaviour
         {
             Chase(sight.herbivoresInRange[0]);
         }
-        else if (sight.playerInRange)
+        else if (sight.playerInRange != null)
         {
             Chase(sight.playerInRange);
         }
-
         else if (!destinationReached)
         {
             if (fleeing)
@@ -60,6 +53,7 @@ public class WolfBehaviour : AggressiveAnimalBehaviour
             RandomIdle();
         }
 
+        attackTimer += Time.deltaTime;
     }
 
     protected override void RandomIdle()
@@ -86,7 +80,6 @@ public class WolfBehaviour : AggressiveAnimalBehaviour
         }
         chaseTimer = idleActionInterval;
         actionTimer = idleActionInterval;
-
     }
 
     protected override void ChangeAnimation(AnimalAnimation newAnimation)

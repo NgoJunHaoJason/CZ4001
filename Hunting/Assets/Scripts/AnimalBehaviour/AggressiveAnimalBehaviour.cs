@@ -26,7 +26,7 @@ public abstract class AggressiveAnimalBehaviour : AnimalBehaviour
 
         if (isPlayer)
         {
-            PlayerHealth playerHealth = reach.playerInRange.GetComponentInChildren<PlayerHealth>();
+            PlayerHealth playerHealth = reach.PlayerInRange.GetComponentInChildren<PlayerHealth>();
             if (playerHealth == null)
                 Debug.LogError("Player is missing PlayerHealth", playerHealth);
             else if (!playerHealth.IsDead)
@@ -34,7 +34,7 @@ public abstract class AggressiveAnimalBehaviour : AnimalBehaviour
         }
         else 
         {
-            AnimalHealth animalHealth = reach.herbivoreInRange.GetComponentInChildren<AnimalHealth>();
+            AnimalHealth animalHealth = reach.HerbivoreInRange.GetComponentInChildren<AnimalHealth>();
             animalHealth.TakeDamageFrom(gameObject);
         }
 
