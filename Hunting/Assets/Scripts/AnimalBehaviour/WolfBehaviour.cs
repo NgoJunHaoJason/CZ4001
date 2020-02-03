@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class WolfBehaviour : AnimalBehaviour
+
+public class WolfBehaviour : AggressiveAnimalBehaviour
 {
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (currentAnimation == AnimalAnimation.DIE)
             return;
@@ -63,7 +62,7 @@ public class WolfBehaviour : AnimalBehaviour
 
     }
 
-    public override void RandomIdle()
+    protected override void RandomIdle()
     {
         if (actionTimer > 0)
         {
@@ -90,7 +89,7 @@ public class WolfBehaviour : AnimalBehaviour
 
     }
 
-    public override void ChangeAnimation(AnimalAnimation newAnimation)
+    protected override void ChangeAnimation(AnimalAnimation newAnimation)
     {
         if (currentAnimation != newAnimation)
         {
@@ -129,4 +128,5 @@ public class WolfBehaviour : AnimalBehaviour
         }
     }
 
+    private void Howl() => ChangeAnimation(AnimalAnimation.HOWL);
 }

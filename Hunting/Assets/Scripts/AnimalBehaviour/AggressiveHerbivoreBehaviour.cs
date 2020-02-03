@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CattleBehaviour : AnimalBehaviour
+
+public class AggressiveHerbivoreBehaviour : AggressiveAnimalBehaviour
 {
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (currentAnimation == AnimalAnimation.DIE)
             return;
@@ -18,8 +16,11 @@ public class CattleBehaviour : AnimalBehaviour
         {
             if (health.ShouldFlee())
                 Flee();
-            else 
+            else if (attackTimer >= attackInterval)
+            {
                 Attack(true);
+                attackTimer = 0;
+            }
         }
         else if (sight.playerInRange && health.attackedByPlayer)
         {
@@ -48,9 +49,10 @@ public class CattleBehaviour : AnimalBehaviour
             RandomIdle();
         }
 
+        attackTimer += Time.deltaTime;
     }
 
-    public override void RandomIdle()
+    protected override void RandomIdle()
     {
         if (actionTimer > 0)
         {
@@ -78,7 +80,7 @@ public class CattleBehaviour : AnimalBehaviour
 
     }
 
-    public override void ChangeAnimation(AnimalAnimation newAnimation)
+    protected override void ChangeAnimation(AnimalAnimation newAnimation)
     {
         if (currentAnimation != newAnimation)
         {

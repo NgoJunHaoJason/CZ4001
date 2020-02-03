@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DeerBehaviour : AnimalBehaviour
+public class PassiveAnimalBehaviour : AnimalBehaviour
 {
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (currentAnimation == AnimalAnimation.DIE)
             return;
@@ -33,7 +31,7 @@ public class DeerBehaviour : AnimalBehaviour
 
     }
 
-    public override void RandomIdle()
+    protected override void RandomIdle()
     {
         if (actionTimer > 0)
         {
@@ -60,8 +58,7 @@ public class DeerBehaviour : AnimalBehaviour
 
     }
 
-
-    public override void ChangeAnimation(AnimalAnimation newAnimation)
+    protected override void ChangeAnimation(AnimalAnimation newAnimation)
     {
         if (currentAnimation != newAnimation)
         {

@@ -3,7 +3,6 @@ using VRTK;
 
 public class AnimalReach : MonoBehaviour
 {
-
     public GameObject playerInRange = null;
     public GameObject herbivoreInRange = null;
     public GameObject deadAnimalInRange = null;
@@ -43,7 +42,7 @@ public class AnimalReach : MonoBehaviour
 
         if (animalHealth.IsDead())
             deadAnimalInRange = other.gameObject;
-        else if (animalBehaviour.animalCategory == AnimalBehaviour.AnimalCategory.HERBIVORE)
+        else if (animalBehaviour.Category == AnimalBehaviour.AnimalCategory.HERBIVORE)
         {
              herbivoreInRange = other.gameObject;
         }
@@ -61,7 +60,7 @@ public class AnimalReach : MonoBehaviour
         }
 
         AnimalBehaviour animalBehaviour = other.GetComponent<AnimalBehaviour>();
-        if (animalBehaviour != null && animalBehaviour.animalCategory == AnimalBehaviour.AnimalCategory.HERBIVORE)
+        if (animalBehaviour != null && animalBehaviour.Category == AnimalBehaviour.AnimalCategory.HERBIVORE)
         {
             herbivoreInRange = null;
             deadAnimalInRange = null;

@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BearBehaviour : AnimalBehaviour
+
+public class BearBehaviour : AggressiveAnimalBehaviour
 {
     void FixedUpdate()
     {
@@ -23,17 +22,19 @@ public class BearBehaviour : AnimalBehaviour
         }
         else if (reach.herbivoreInRange)
         {
-            attackTimer += Time.deltaTime;
-
             if (attackTimer >= attackInterval)
+            {
                 Attack(false);
+                attackTimer = 0;
+            }
         }
         else if (reach.playerInRange)
         {
-            attackTimer += Time.deltaTime;
-
             if (attackTimer >= attackInterval)
+            {
                 Attack(true);
+                attackTimer = 0;
+            }
         }
         else if (sight.deadAnimalInRange)
         {
@@ -60,9 +61,10 @@ public class BearBehaviour : AnimalBehaviour
             RandomIdle();
         }
 
+        attackTimer += Time.deltaTime;
     }
 
-    public override void RandomIdle()
+    protected override void RandomIdle()
     {
         if (actionTimer > 0)
         {
@@ -86,7 +88,7 @@ public class BearBehaviour : AnimalBehaviour
 
     }
 
-    public override void ChangeAnimation(AnimalAnimation newAnimation)
+    protected override void ChangeAnimation(AnimalAnimation newAnimation)
     {
         if (currentAnimation != newAnimation)
         {

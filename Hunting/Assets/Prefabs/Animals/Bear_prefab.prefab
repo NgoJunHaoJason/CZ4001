@@ -1013,20 +1013,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2598397a8b869f48aee698d5da18b9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charController: {fileID: 8234905573733556388}
-  animator: {fileID: 4028171670236487103}
-  health: {fileID: 4028171670079555939}
-  sight: {fileID: 4028171669651284268}
-  reach: {fileID: 4028171670902519219}
-  audioSource: {fileID: 4028171670874748023}
   animalCategory: 1
   animalType: 7
-  minMovableDistance: 10
   walkSpeed: 1
   runSpeed: 4
   turnSpeed: 3
+  minMovableDistance: 10
   obstacleDetectionRange: 5
+  attackInterval: 2
+  health: {fileID: 4028171670079555939}
+  sight: {fileID: 4028171669651284268}
   idleActionInterval: 5
+  reach: {fileID: 4028171670902519219}
 --- !u!82 &4028171670874748023
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1585,7 +1583,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3203d74de1dbc4682e8b6b1548029e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animalSight: {fileID: 4028171669651284268}
   playerInRange: {fileID: 0}
   herbivoreInRange: {fileID: 0}
   deadAnimalInRange: {fileID: 0}

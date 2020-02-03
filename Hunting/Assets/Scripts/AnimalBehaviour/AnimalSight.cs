@@ -31,13 +31,13 @@ public class AnimalSight : MonoBehaviour
 
         if (animalHealth.IsDead())
             deadAnimalInRange = other.gameObject;
-        else if (animalBehaviour.animalCategory == AnimalBehaviour.AnimalCategory.HERBIVORE)
+        else if (animalBehaviour.Category == AnimalBehaviour.AnimalCategory.HERBIVORE)
         {
             if (herbivoresInRange.Contains(other.gameObject))
                 return;
             else herbivoresInRange.Add(other.gameObject);
         }
-        else if (animalBehaviour.animalCategory == AnimalBehaviour.AnimalCategory.CARNIVORE)
+        else if (animalBehaviour.Category == AnimalBehaviour.AnimalCategory.CARNIVORE)
         {
             if (carnivoresInRange.Contains(other.gameObject))
                 return;
@@ -59,9 +59,9 @@ public class AnimalSight : MonoBehaviour
 
         if (animalBehaviour == null)
             return;
-        else if (animalBehaviour.animalCategory == AnimalBehaviour.AnimalCategory.HERBIVORE)
+        else if (animalBehaviour.Category == AnimalBehaviour.AnimalCategory.HERBIVORE)
             herbivoresInRange.Remove(other.gameObject);
-        else if (animalBehaviour.animalCategory == AnimalBehaviour.AnimalCategory.CARNIVORE)
+        else if (animalBehaviour.Category == AnimalBehaviour.AnimalCategory.CARNIVORE)
             carnivoresInRange.Remove(other.gameObject);
 
     }
