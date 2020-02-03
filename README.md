@@ -36,3 +36,13 @@ TODO
 
 - [birds](https://assetstore.unity.com/packages/3d/characters/animals/living-birds-15649)
 - [reticle sprite](https://www.hiclipart.com/free-transparent-background-png-clipart-mryvr)
+
+## Miscellaneous
+
+### fixes
+
+Remote "origin" does not support the LFS locking API. Consider disabling it with:
+
+```bash
+git config lfs.https://github.com/NgoJunHaoJason/CZ4001-VR.git/info/lfs.locksverify false
+```
