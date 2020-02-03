@@ -3,7 +3,6 @@
 
 public class WolfBehaviour : AggressiveAnimalBehaviour
 {
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (currentAnimation == AnimalAnimation.DIE)
@@ -17,11 +16,11 @@ public class WolfBehaviour : AggressiveAnimalBehaviour
         {
             Flee();
         }
-        else if (reach.HasDeadAnimalInRange)
+        else if (((CarnivoreReach) reach).HasDeadAnimalInRange)
         {
             Eat();
         }
-        else if (reach.HasPlayerInRange || reach.HasHerbivoreInRange)
+        else if (reach.HasPlayerInRange || ((CarnivoreReach) reach).HasHerbivoreInRange)
         {
             if (attackTimer >= attackInterval)
             {
@@ -122,4 +121,12 @@ public class WolfBehaviour : AggressiveAnimalBehaviour
     }
 
     private void Howl() => ChangeAnimation(AnimalAnimation.HOWL);
+
+    // wolf can chase forever
+    public new void Chase(GameObject target)
+    {
+        ChangeDestination(target, 1f);
+
+        Run();
+    }
 }

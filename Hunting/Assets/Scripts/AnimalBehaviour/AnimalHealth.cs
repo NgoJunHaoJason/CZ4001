@@ -32,7 +32,7 @@ public class AnimalHealth : MonoBehaviour
 
     }
 
-    public void TakeDamageFrom(GameObject attacker)
+    public void TakeDamageFrom(GameObject attacker, int damage=1)
     {
         if (attacker != GameObject.FindGameObjectWithTag("Player"))
         {
@@ -43,7 +43,7 @@ public class AnimalHealth : MonoBehaviour
             }
             else
             {
-                currentHealth -= 0.1f;
+                currentHealth -= damage;
                 damageTimer = damageDelay;
             }
         } else

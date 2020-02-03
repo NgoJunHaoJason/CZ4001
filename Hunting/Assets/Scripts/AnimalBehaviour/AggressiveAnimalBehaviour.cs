@@ -5,6 +5,8 @@ public abstract class AggressiveAnimalBehaviour : AnimalBehaviour
 {
     # region Serialize Fields
 
+    // this is rather dangerous as AnimalReach can be assigned in Unity editor
+    // when it is supposed to be CarnivoreReach; should update in the future
     [SerializeField]
     protected AnimalReach reach;
 
@@ -32,10 +34,10 @@ public abstract class AggressiveAnimalBehaviour : AnimalBehaviour
             else if (!playerHealth.IsDead)
                 playerHealth.TakeDamage(10);
         }
-        else 
+        else if (reach is CarnivoreReach)
         {
-            AnimalHealth animalHealth = reach.HerbivoreInRange.GetComponentInChildren<AnimalHealth>();
-            animalHealth.TakeDamageFrom(gameObject);
+            AnimalHealth animalHealth = ((CarnivoreReach) reach).HerbivoreInRange.GetComponentInChildren<AnimalHealth>();
+            animalHealth.TakeDamageFrom(gameObject, 2);
         }
 
         attackTimer = 0;

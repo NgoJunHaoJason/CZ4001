@@ -397,10 +397,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41e7f00ba0a6e14f82910d2d5b1bb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: {fileID: 0}
-  herbivoresInRange: []
-  carnivoresInRange: []
-  deadAnimalInRange: {fileID: 0}
 --- !u!1 &4028171669660434576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,10 +1017,10 @@ MonoBehaviour:
   minMovableDistance: 10
   obstacleDetectionRange: 5
   attackInterval: 2
+  idleActionInterval: 5
   health: {fileID: 4028171670079555939}
   sight: {fileID: 4028171669651284268}
-  idleActionInterval: 5
-  reach: {fileID: 4028171670902519219}
+  reach: {fileID: 838169553202382193}
 --- !u!82 &4028171670874748023
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1536,9 +1532,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4028171670902519217}
   - component: {fileID: 4028171670902519216}
-  - component: {fileID: 4028171670902519219}
+  - component: {fileID: 838169553202382193}
   m_Layer: 0
-  m_Name: AnimalReach
+  m_Name: CarnivoreReach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1571,7 +1567,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.8
   m_Center: {x: 0, y: 0.8, z: 1.4}
---- !u!114 &4028171670902519219
+--- !u!114 &838169553202382193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1580,12 +1576,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4028171670902519222}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c3203d74de1dbc4682e8b6b1548029e, type: 3}
+  m_Script: {fileID: 11500000, guid: e5184b599739b511ea17774f3e3ea1cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: {fileID: 0}
-  herbivoreInRange: {fileID: 0}
-  deadAnimalInRange: {fileID: 0}
 --- !u!1 &4028171670923615655
 GameObject:
   m_ObjectHideFlags: 0

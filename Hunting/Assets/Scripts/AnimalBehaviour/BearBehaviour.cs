@@ -16,11 +16,11 @@ public class BearBehaviour : AggressiveAnimalBehaviour
         {
             Flee();
         }
-        else if (reach.HasDeadAnimalInRange)
+        else if (((CarnivoreReach) reach).HasDeadAnimalInRange)
         {
             Eat();
         }
-        else if (reach.HasPlayerInRange || reach.HasHerbivoreInRange)
+        else if (reach.HasPlayerInRange || ((CarnivoreReach) reach).HasHerbivoreInRange)
         {
             if (attackTimer >= attackInterval)
             {
