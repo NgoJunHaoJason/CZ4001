@@ -17,7 +17,7 @@ public class AnimalReach : MonoBehaviour
 
     # endregion
 
-    # region Serialize Fields
+    # region Fields
 
     private GameObject playerInRange = null;
     private GameObject herbivoreInRange = null;

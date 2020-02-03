@@ -22,18 +22,18 @@ public class AggressiveHerbivoreBehaviour : AggressiveAnimalBehaviour
                 attackTimer = 0;
             }
         }
-        else if (sight.playerInRange != null && health.attackedByPlayer)
+        else if (sight.HasPlayerInRange && health.attackedByPlayer)
         {
             if (health.ShouldFlee())
                 Flee();
             else 
-                Chase(sight.playerInRange);
+                Chase(sight.PlayerInRange);
         }
         else if (health.IsRecentlyDamaged())
         {
             Flee();
         }
-        else if (sight.carnivoresInRange.Count > 0)
+        else if (sight.HasCarnivoreInRange)
         {
             Flee();
         }

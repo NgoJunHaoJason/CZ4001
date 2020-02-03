@@ -2,15 +2,40 @@
 using UnityEngine;
 using VRTK;
 
+
 public class AnimalSight : MonoBehaviour
 {
-    public GameObject playerInRange = null;
+    # region Properties
 
-    public GameObject deadAnimalInRange = null;
+    public GameObject PlayerInRange { get => playerInRange; }
 
-    public List<GameObject> herbivoresInRange = new List<GameObject>();
+    public bool HasPlayerInRange { get => playerInRange != null; }
 
-    public List<GameObject> carnivoresInRange = new List<GameObject>();
+    public GameObject DeadAnimalInRange { get => deadAnimalInRange; }
+
+    public bool HasDeadAnimalInRange { get => deadAnimalInRange != null; }
+
+    public bool HasCarnivoreInRange { get => carnivoresInRange.Count > 0; }
+
+    public GameObject FirstHerbivoreInRange { get => herbivoresInRange[0]; }
+
+    public bool HasHerbivoreInRange { get => herbivoresInRange.Count > 0; }
+
+    # endregion
+
+    # region Fields
+
+    private GameObject playerInRange = null;
+
+    private GameObject deadAnimalInRange = null;
+
+    private List<GameObject> carnivoresInRange = new List<GameObject>();
+
+    private List<GameObject> herbivoresInRange = new List<GameObject>();
+
+    # endregion
+
+    # region Private Methods
 
     private void OnTriggerStay(Collider other)
     {
@@ -65,6 +90,7 @@ public class AnimalSight : MonoBehaviour
             herbivoresInRange.Remove(other.gameObject);
         else if (animalBehaviour.Category == AnimalBehaviour.AnimalCategory.CARNIVORE)
             carnivoresInRange.Remove(other.gameObject);
-
     }
+
+    # endregion
 }

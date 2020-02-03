@@ -13,7 +13,7 @@ public class PassiveAnimalBehaviour : AnimalBehaviour
         {
             Die();
         }
-        else if (sight.playerInRange != null || sight.carnivoresInRange.Count > 0)
+        else if (sight.HasPlayerInRange || sight.HasCarnivoreInRange)
         {
             Flee();
         }

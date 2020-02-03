@@ -12,7 +12,7 @@ public class BearBehaviour : AggressiveAnimalBehaviour
         {
             Die();
         }
-        else if (health.IsRecentlyDamaged() && !sight.playerInRange)
+        else if (health.IsRecentlyDamaged() && !sight.HasPlayerInRange)
         {
             Flee();
         }
@@ -28,17 +28,17 @@ public class BearBehaviour : AggressiveAnimalBehaviour
                 attackTimer = 0;
             }
         }
-        else if (sight.deadAnimalInRange != null)
+        else if (sight.HasDeadAnimalInRange)
         {
-            Chase(sight.deadAnimalInRange);
+            Chase(sight.DeadAnimalInRange);
         }
-        else if (sight.herbivoresInRange.Count > 0)
+        else if (sight.HasHerbivoreInRange)
         {
-            Chase(sight.herbivoresInRange[0]);
+            Chase(sight.FirstHerbivoreInRange);
         }
-        else if (sight.playerInRange != null)
+        else if (sight.HasPlayerInRange)
         {
-            Chase(sight.playerInRange);
+            Chase(sight.PlayerInRange);
         }
         else if (!destinationReached)
         {
