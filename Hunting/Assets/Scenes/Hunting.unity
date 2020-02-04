@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 142347225}
   - component: {fileID: 142347226}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: TempGameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2096,7 +2096,7 @@ GameObject:
   - component: {fileID: 810421208}
   - component: {fileID: 810421209}
   m_Layer: 0
-  m_Name: Player
+  m_Name: TempPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
