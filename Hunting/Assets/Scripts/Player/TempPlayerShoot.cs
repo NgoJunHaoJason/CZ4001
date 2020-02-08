@@ -44,7 +44,7 @@ public class TempPlayerShoot : MonoBehaviour
             if (tempArrowPrefab == null)
                 Debug.LogError("Temp Arrow Prefab is not assigned in Temp Player Shoot.");
             if (playerCamera == null)
-                Debug.LogError("Player Game Object's Camera is missing").
+                Debug.LogError("Player Game Object's Camera is missing");
         }
     }
 
@@ -65,14 +65,21 @@ public class TempPlayerShoot : MonoBehaviour
 
     private void ShootArrow()
     {
-        Vector3 startingPosition = transform.position;
-        startingPosition.y += 0.5f; // right below camera
+        Vector3 startingPosition = playerCamera.transform.position;
+        startingPosition.y -= 0.1f; // right below camera
+
+        Quaternion startingRotation = new Quaternion(
+            transform.rotation.x + playerCamera.transform.rotation.x, 
+            transform.rotation.y + playerCamera.transform.rotation.y,
+            transform.rotation.z + playerCamera.transform.rotation.z,
+            transform.rotation.w + playerCamera.transform.rotation.w
+        );
 
         // create arrow within temporary player game object
         GameObject arrowGameObject = Instantiate(
             tempArrowPrefab, 
             startingPosition, 
-            transform.rotation
+            startingRotation
         );
 
         Physics.IgnoreCollision(playerCollider, arrowGameObject.GetComponent<Collider>());
