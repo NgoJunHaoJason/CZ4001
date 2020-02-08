@@ -37,7 +37,21 @@ note - the following VR-related GameObjects are disabled in the hierarchy so tha
 
 ## Building / Deploying
 
-TODO
+before building for VR (for CZ4001 computer):
+
+- disable `Temp/TempPlayer`
+- disable `Temp/TempGameManager`
+- enable `[VRTK_SDKManager]`
+- enable `[VRTK_Scripts]`
+- enable `HeadsetFollower`
+- enable `GameController/Bow`
+- set the `Render Camera` parameter for `HUDCanvas` to `[VRTK_SDKManager]/SteamVR/[CameraRig]/Camera (head)/Camera (eye)`
+
+when building for VR (for CZ4001 computer):
+
+- select `PC, Mac & Linux Standalone`
+- set `Target Platform` to `Windows`
+- set `Architecture` to `x86_64`
 
 ## Resources used
 
