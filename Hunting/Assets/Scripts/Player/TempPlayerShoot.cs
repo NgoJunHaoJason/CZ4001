@@ -17,9 +17,14 @@ public class TempPlayerShoot : MonoBehaviour
     [SerializeField]
     private float shootDelay = 1f;
 
+    [SerializeField]
+    private bool showArrowTrail = true;
+
     # endregion
 
     # region Fields
+
+    private Camera playerCamera = null;
 
     private Collider playerCollider = null;
 
@@ -32,11 +37,14 @@ public class TempPlayerShoot : MonoBehaviour
     void Start()
     {
         playerCollider = GetComponent<Collider>();
+        playerCamera = GetComponentInChildren<Camera>();
 
         if (Debug.isDebugBuild)
         {
             if (tempArrowPrefab == null)
                 Debug.LogError("Temp Arrow Prefab is not assigned in Temp Player Shoot.");
+            if (playerCamera == null)
+                Debug.LogError("Player Game Object's Camera is missing").
         }
     }
 
@@ -58,7 +66,7 @@ public class TempPlayerShoot : MonoBehaviour
     private void ShootArrow()
     {
         Vector3 startingPosition = transform.position;
-        startingPosition.y += 0.6f; // right below camera
+        startingPosition.y += 0.5f; // right below camera
 
         // create arrow within temporary player game object
         GameObject arrowGameObject = Instantiate(
@@ -81,6 +89,12 @@ public class TempPlayerShoot : MonoBehaviour
         }
         else
         {
+            TrailRenderer trailRenderer = arrowGameObject.GetComponentInChildren<TrailRenderer>();
+
+            if (trailRenderer != null && showArrowTrail)
+                trailRenderer.emitting = true;
+
+            arrowRigidbody.isKinematic = false;
             arrowRigidbody.velocity = arrowGameObject.transform.
                 TransformDirection(Vector3.forward) * thrust;
         }

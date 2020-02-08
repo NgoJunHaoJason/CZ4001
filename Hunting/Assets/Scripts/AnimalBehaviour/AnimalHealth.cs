@@ -25,7 +25,9 @@ public class AnimalHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Arrow"))
         {
-            print("Arrow collided with " + gameObject.name);
+            if (Debug.isDebugBuild)
+                Debug.Log("Arrow collided with " + gameObject.name);
+            
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             TakeDamageFrom(player);
         }
@@ -46,7 +48,8 @@ public class AnimalHealth : MonoBehaviour
                 currentHealth -= 0.1f;
                 damageTimer = damageDelay;
             }
-        } else
+        }
+        else
         {
             recentlyDamaged = true;
             attackedByPlayer = true;
