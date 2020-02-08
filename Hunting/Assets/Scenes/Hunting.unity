@@ -2096,6 +2096,7 @@ GameObject:
   - component: {fileID: 810421210}
   - component: {fileID: 810421201}
   - component: {fileID: 810421207}
+  - component: {fileID: 810421211}
   m_Layer: 0
   m_Name: TempPlayer
   m_TagString: Player
@@ -2222,7 +2223,7 @@ MonoBehaviour:
   startingHealth: 100
   healthValueText: {fileID: 1392113817}
   healthSlider: {fileID: 1876340628}
-  deathAudioClip: {fileID: 0}
+  deathAudioClip: {fileID: 8300000, guid: 5afca42ac0b79634ead8c777e0adcc0c, type: 3}
   flashSpeed: 5
   flashColour: {r: 1, g: 0, b: 0, a: 0.1}
   damageImage: {fileID: 267387195}
@@ -2350,6 +2351,22 @@ MonoBehaviour:
   cameraHorizontalSensitivity: 4
   cameraVerticalSensitivity: 3
   cameraSmoothing: 2
+--- !u!114 &810421211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 810421200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a3e8897600a3888a8f2b2b295e7603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tempArrowPrefab: {fileID: 1425709975329154792, guid: 2d1a8e813c1301c82a28806e203c8754,
+    type: 3}
+  thrust: 20
+  shootDelay: 1
 --- !u!114 &844523502 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114743014625679918, guid: eb6748575a8fce346b19dff6cb1471ec,
