@@ -72,6 +72,21 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7544478920738994493, guid: eac9d91db6613af45a37e42f9b5eaddb,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544478920739999023, guid: eac9d91db6613af45a37e42f9b5eaddb,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544478920739999023, guid: eac9d91db6613af45a37e42f9b5eaddb,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7544478920752322695, guid: eac9d91db6613af45a37e42f9b5eaddb,
         type: 3}
       propertyPath: m_Enabled
@@ -97,10 +112,25 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7544478920739995449, guid: eac9d91db6613af45a37e42f9b5eaddb,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544478920739995449, guid: eac9d91db6613af45a37e42f9b5eaddb,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7544478920739995449, guid: eac9d91db6613af45a37e42f9b5eaddb,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7544478920739284303, guid: eac9d91db6613af45a37e42f9b5eaddb,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8466824854072760794, guid: eac9d91db6613af45a37e42f9b5eaddb,
         type: 3}

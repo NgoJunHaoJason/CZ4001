@@ -12,10 +12,10 @@ public class TempPlayerShoot : MonoBehaviour
     private GameObject tempArrowPrefab = null;
 
     [SerializeField]
-    private float thrust = 20f;
+    private float thrust = 25f;
 
     [SerializeField]
-    private float shootDelay = 1f;
+    private float shootDelay = 0.5f;
 
     [SerializeField]
     private bool showArrowTrail = true;
@@ -68,6 +68,7 @@ public class TempPlayerShoot : MonoBehaviour
         Vector3 startingPosition = playerCamera.transform.position;
         startingPosition.y -= 0.1f; // right below camera
 
+        // probability not the most straight-forward way to do this, but this works
         Quaternion startingRotation = new Quaternion(
             transform.rotation.x + playerCamera.transform.rotation.x, 
             transform.rotation.y + playerCamera.transform.rotation.y,
@@ -84,8 +85,6 @@ public class TempPlayerShoot : MonoBehaviour
 
         Physics.IgnoreCollision(playerCollider, arrowGameObject.GetComponent<Collider>());
 
-        Rigidbody arrowRigidbody = arrowGameObject.GetComponent<Rigidbody>();
-
         if (arrowGameObject == null)
         {
             if (Debug.isDebugBuild)
@@ -101,10 +100,15 @@ public class TempPlayerShoot : MonoBehaviour
             if (trailRenderer != null && showArrowTrail)
                 trailRenderer.emitting = true;
 
+            Rigidbody arrowRigidbody = arrowGameObject.GetComponent<Rigidbody>();
+
             arrowRigidbody.isKinematic = false;
+            
             arrowRigidbody.velocity = arrowGameObject.transform.
                 TransformDirection(Vector3.forward) * thrust;
         }
+
+        arrowGameObject.GetComponentInChildren<VRTK.Examples.Archery.Arrow>().inFlight = true;
     }
 
     # endregion

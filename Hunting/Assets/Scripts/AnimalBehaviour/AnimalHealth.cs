@@ -31,7 +31,6 @@ public class AnimalHealth : MonoBehaviour
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             TakeDamageFrom(player);
         }
-
     }
 
     public void TakeDamageFrom(GameObject attacker)
@@ -58,6 +57,8 @@ public class AnimalHealth : MonoBehaviour
 
         lastAttackedBy = attacker;
 
+        if (Debug.isDebugBuild)
+            Debug.Log("Animal took damage; current health: " + currentHealth.ToString());
     }
 
     public bool IsDead()
