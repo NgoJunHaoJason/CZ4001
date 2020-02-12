@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameSettings : MonoBehaviour
 {
     public TextMeshProUGUI message;
+    public Text scoreText;
     public bool showArrowTrail;
     public float messageDuration;
 
@@ -22,7 +24,7 @@ public class GameSettings : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        scoreText.text = "Score: 0";
     }
 
     private void Update()
@@ -64,10 +66,13 @@ public class GameSettings : MonoBehaviour
         else
         {
             score--;
-            message.text = "Please Hunt Responsibly";
-            message.color = badMessage;
-            hasMessageToShow = true;
-            messageDurationTimer = messageDuration;
+            // message.text = "Please Hunt Responsibly";
+            // message.color = badMessage;
+            // hasMessageToShow = true;
+            // messageDurationTimer = messageDuration;
         }
+
+        scoreText.text = "Score: " + score*10;
+        // Debug.Log("Score changed to " + score);
     }
 }
