@@ -118,7 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3203d74de1dbc4682e8b6b1548029e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animalSight: {fileID: 2774512153939878415}
   playerInRange: {fileID: 0}
   herbivoreInRange: {fileID: 0}
   deadAnimalInRange: {fileID: 0}
@@ -1070,6 +1069,7 @@ MonoBehaviour:
   turnSpeed: 3
   obstacleDetectionRange: 5
   idleActionInterval: 5
+  attackInterval: 2
 --- !u!82 &2774512153406232538
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1242,9 +1242,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 16
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &2774512154617643691
 MonoBehaviour:
