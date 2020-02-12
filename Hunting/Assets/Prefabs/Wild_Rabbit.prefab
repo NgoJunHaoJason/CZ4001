@@ -639,6 +639,7 @@ MonoBehaviour:
   turnSpeed: 3
   obstacleDetectionRange: 5
   idleActionInterval: 5
+  attackInterval: 2
 --- !u!82 &772342644
 AudioSource:
   m_ObjectHideFlags: 0
@@ -856,9 +857,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 16
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &772342648
 MonoBehaviour:

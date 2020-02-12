@@ -7,16 +7,12 @@
 *   https://youtu.be/blO039OzUZc
 */
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerController : MonoBehaviour
+public class TempPlayerLook : MonoBehaviour
 {
-    [SerializeField]
-    private int movementSpeed = 3;
+    # region Serialize Fields
 
     [SerializeField]
-    private int jumpingForce = 3;
-
-    [SerializeField]
-    private int cameraHorizontalSensitivity = 2;
+    private int cameraHorizontalSensitivity = 4;
 
     [SerializeField]
     private int cameraVerticalSensitivity = 3;
@@ -24,54 +20,39 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private int cameraSmoothing = 2;
 
-    private Rigidbody playerRigidbody;
-    private Camera playerCamera;
+    # endregion
+
+    # region Fields
+
+    private Camera playerCamera = null;
 
     private Vector2 cameraLook = new Vector2();
+
     private Vector2 smoothVector = new Vector2();
 
-    private bool isGrounded = true;
+    # endregion
+
+    # region MonoBehaviour Methods
 
     void Awake()
     {
-        playerRigidbody = GetComponent<Rigidbody>();
         playerCamera = GetComponentInChildren<Camera>();
+
+        if (Debug.isDebugBuild && playerCamera == null)
+            Debug.LogError("Camera is not attached to Player game object", gameObject);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Move();
         CameraLook();
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Terrain"))
-        {
-            isGrounded = true;
-        }
-    }
+    # endregion
 
-    void Move()
-    {
-        float horizontalAxis = Input.GetAxis("Horizontal");
-        float verticalAxis = Input.GetAxis("Vertical");
+    # region Private Methods
 
-        Vector3 movement = horizontalAxis * transform.right + verticalAxis * transform.forward;
-
-        movement = movement.normalized * movementSpeed * Time.deltaTime;
-
-        playerRigidbody.MovePosition(transform.position + movement);
-
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            playerRigidbody.AddForce(Vector3.up * jumpingForce, ForceMode.Impulse);
-            isGrounded = false;
-        }
-    }
-
-    void CameraLook()
+    private void CameraLook()
     {
         float mouseX = Input.GetAxisRaw("Mouse X");
         float mouseY = Input.GetAxisRaw("Mouse Y");
@@ -91,4 +72,7 @@ public class PlayerController : MonoBehaviour
 
         transform.rotation = Quaternion.AngleAxis(cameraLook.x, transform.up);
     }
+
+    # endregion
 }
+
