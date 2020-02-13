@@ -4,22 +4,17 @@
 public abstract class AggressiveAnimalBehaviour : AnimalBehaviour
 {
     # region Serialize Fields
-
     // this is rather dangerous as AnimalReach can be assigned in Unity editor
-    // when it is supposed to be CarnivoreReach; should update in the future
+    // when CarnivoreReach shuld be assigned; should update in the future
     [SerializeField]
     protected AnimalReach reach;
-
     # endregion
 
     # region Fields
-
     protected float attackTimer = 0;
-
     # endregion
 
     # region Protected Methods
-
     protected void Attack(bool isPlayer)
     {
         ChangeAnimation(AnimalAnimation.ATTACK);
@@ -42,6 +37,5 @@ public abstract class AggressiveAnimalBehaviour : AnimalBehaviour
 
         attackTimer = 0;
     }
-
     # endregion
 }

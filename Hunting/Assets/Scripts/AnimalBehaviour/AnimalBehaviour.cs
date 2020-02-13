@@ -6,23 +6,18 @@
 public abstract class AnimalBehaviour : MonoBehaviour
 {
     # region Enums
-
     public enum AnimalCategory { HERBIVORE, CARNIVORE }
 
     public enum AnimalType { Rabbit, Deer, Cattle, Goat, Ibex, Boar, Wolf, Bear}
 
     public enum AnimalAnimation { ATTACK, WALK, RUN, IDLE, DIE, EAT, HOWL }
-
     # endregion
 
     # region Properties
-
     public AnimalCategory Category { get => animalCategory; }
-
     # endregion
 
     # region Serialize Fields
-
     [SerializeField]
     private AnimalCategory animalCategory;
 
@@ -55,11 +50,9 @@ public abstract class AnimalBehaviour : MonoBehaviour
     
     [SerializeField]
     protected AnimalSight sight;
-
     # endregion
 
     # region Fields
-
     protected Animator animator = null;
 
     protected AudioSource audioSource = null;
@@ -85,11 +78,9 @@ public abstract class AnimalBehaviour : MonoBehaviour
     private Vector3 destination = new Vector3();
 
     private float movementTimer = 0;
-
     # endregion
 
     # region MonoBehaviour Methods
-
     void Start()
     {
         TerrainManager terrainManager = GameObject.
@@ -104,11 +95,9 @@ public abstract class AnimalBehaviour : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         characterController = GetComponent<CharacterController>();
     }
-
     # endregion
 
     # region Private Methods
-
     private bool CollisionDetected(Vector3 direction)
     {
         direction.y = 0;
@@ -128,7 +117,7 @@ public abstract class AnimalBehaviour : MonoBehaviour
         return false;
     }
 
-        private void Move(float speed)
+    private void Move(float speed)
     {
         /*
         Vector3 direction = destination - transform.position;
@@ -166,11 +155,9 @@ public abstract class AnimalBehaviour : MonoBehaviour
             movementTimer -= Time.deltaTime;
         }
     }
-
     # endregion
 
     # region Protected Methods
-
     protected void ChangeDestination(GameObject target, float distanceMult)
     {
         if (target != null)
@@ -259,14 +246,11 @@ public abstract class AnimalBehaviour : MonoBehaviour
         Turn();
         Move(runSpeed);
     }
-
     # endregion
 
     # region Abstract Methods
-
     protected abstract void RandomIdle();
 
     protected abstract void ChangeAnimation(AnimalAnimation newAnimation);
-    
     # endregion
 }

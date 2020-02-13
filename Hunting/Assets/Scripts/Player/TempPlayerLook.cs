@@ -10,7 +10,6 @@
 public class TempPlayerLook : MonoBehaviour
 {
     # region Serialize Fields
-
     [SerializeField]
     private int cameraHorizontalSensitivity = 4;
 
@@ -19,21 +18,17 @@ public class TempPlayerLook : MonoBehaviour
 
     [SerializeField]
     private int cameraSmoothing = 2;
-
     # endregion
 
     # region Fields
-
     private Camera playerCamera = null;
 
     private Vector2 cameraLook = new Vector2();
 
     private Vector2 smoothVector = new Vector2();
-
     # endregion
 
     # region MonoBehaviour Methods
-
     void Awake()
     {
         playerCamera = GetComponentInChildren<Camera>();
@@ -47,11 +42,9 @@ public class TempPlayerLook : MonoBehaviour
     {
         CameraLook();
     }
-
     # endregion
 
     # region Private Methods
-
     private void CameraLook()
     {
         float mouseX = Input.GetAxisRaw("Mouse X");
@@ -72,7 +65,6 @@ public class TempPlayerLook : MonoBehaviour
 
         transform.rotation = Quaternion.AngleAxis(cameraLook.x, transform.up);
     }
-
     # endregion
 }
 
