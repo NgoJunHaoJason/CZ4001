@@ -75,10 +75,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41e7f00ba0a6e14f82910d2d5b1bb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: {fileID: 0}
-  herbivoresInRange: []
-  carnivoresInRange: []
-  deadAnimalInRange: {fileID: 0}
 --- !u!135 &4023795471275622239
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -578,21 +574,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d3954df063c5144b7e23bb302fc1f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charController: {fileID: 5934935938410392188}
-  animator: {fileID: 4023795471819285545}
-  health: {fileID: 4023795473210225033}
-  sight: {fileID: 4023795471275622238}
-  reach: {fileID: 0}
-  audioSource: {fileID: 4023795472043812156}
   animalCategory: 0
   animalType: 1
-  minMovableDistance: 12
   walkSpeed: 1.2
   runSpeed: 4
   turnSpeed: 3
+  minMovableDistance: 12
   obstacleDetectionRange: 5
   idleActionInterval: 5
-  attackInterval: 2
+  health: {fileID: 4023795473210225033}
+  sight: {fileID: 4023795471275622238}
 --- !u!82 &4023795472043812156
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1838,11 +1829,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d433117993024418d61cd1c2d347c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 2
   fightFleeThreshold: 0
   damageDelay: 0.5
-  attackedByPlayer: 0
-  lastAttackedBy: {fileID: 0}
 --- !u!1 &4023795473231424695
 GameObject:
   m_ObjectHideFlags: 0

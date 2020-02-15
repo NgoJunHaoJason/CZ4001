@@ -556,11 +556,11 @@ MonoBehaviour:
   turnSpeed: 3
   minMovableDistance: 12
   obstacleDetectionRange: 5
-  attackInterval: 2
   idleActionInterval: 5
   health: {fileID: 7514884818606880201}
   sight: {fileID: 7514884818584587227}
   reach: {fileID: 5307287691230096837}
+  attackInterval: 2
 --- !u!82 &7514884817591733887
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1285,11 +1285,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d433117993024418d61cd1c2d347c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 2
   fightFleeThreshold: 0
   damageDelay: 0.5
-  attackedByPlayer: 0
-  lastAttackedBy: {fileID: 0}
 --- !u!1 &7514884818678956057
 GameObject:
   m_ObjectHideFlags: 0
