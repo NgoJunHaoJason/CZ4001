@@ -6,9 +6,6 @@ public class PassiveAnimalBehaviour : AnimalBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (currentAnimation == AnimalAnimation.DIE)
-            return;
-
         if (health.IsDead)
         {
             Die();

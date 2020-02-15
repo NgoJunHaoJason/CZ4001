@@ -34,6 +34,12 @@ public abstract class AnimalBehaviour : MonoBehaviour
     private float turnSpeed = 3;
 
     [SerializeField]
+    private float deathDuration = 30;
+
+    [SerializeField]
+    private float dyingSpeed = 1e-10f;
+
+    [SerializeField]
     private int minMovableDistance;
 
     [SerializeField]
@@ -63,6 +69,8 @@ public abstract class AnimalBehaviour : MonoBehaviour
     protected float actionTimer = 0;
     
     protected float chaseTimer = 0;
+
+    private float deathTimer = 0;
 
     private CharacterController characterController = null;
 
@@ -185,7 +193,7 @@ public abstract class AnimalBehaviour : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, turnSpeed * Time.deltaTime);
     }
 
-    public void Flee()
+    protected void Flee()
     {
         if (destinationReached)
             ChangeDestination(null, 2f);
@@ -194,7 +202,7 @@ public abstract class AnimalBehaviour : MonoBehaviour
         Run();
     }
 
-    public void Chase(GameObject target)
+    protected void Chase(GameObject target)
     {
         ChangeDestination(target, 1f);
 
@@ -209,12 +217,33 @@ public abstract class AnimalBehaviour : MonoBehaviour
         }
     }
 
-    public void Die()
+    protected void Die()
     {
-        ChangeAnimation(AnimalAnimation.DIE);
-        if (GameObject.FindGameObjectWithTag("Player") == health.LastAttackedBy)
-            gameLoader.SubmitHuntedAnimal(animalType);
-        Destroy(gameObject, 30f);
+        if (deathTimer == 0) // animal just died
+        {
+            ChangeAnimation(AnimalAnimation.DIE); 
+
+            if (health.LastAttackedBy.CompareTag("Player"))
+                gameLoader.SubmitHuntedAnimal(animalType);
+        }
+
+        if (deathTimer < deathDuration)
+        {
+            deathTimer += Time.deltaTime;
+        }
+        else
+        {
+            // allow animal to sink through ground
+            Physics.IgnoreCollision(
+                GameObject.FindGameObjectWithTag("Terrain").GetComponent<Collider>(),
+                this.GetComponent<Collider>()
+            );
+
+            if (this.transform.position.y > -5f)
+                this.transform.Translate(-Vector3.up * Time.deltaTime * dyingSpeed, Space.World);
+            else
+                Destroy(this.gameObject);
+        }
     }
 
     protected void Eat()
