@@ -64,7 +64,7 @@ public class TempPlayerShoot : MonoBehaviour
 
         // probability not the most straight-forward way to do this, but this works
         Quaternion startingRotation = new Quaternion(
-            transform.rotation.x + playerCamera.transform.rotation.x, 
+            transform.rotation.x + playerCamera.transform.rotation.x,
             transform.rotation.y + playerCamera.transform.rotation.y,
             transform.rotation.z + playerCamera.transform.rotation.z,
             transform.rotation.w + playerCamera.transform.rotation.w
@@ -72,41 +72,44 @@ public class TempPlayerShoot : MonoBehaviour
 
         // create arrow within temporary player game object
         GameObject arrowGameObject = Instantiate(
-            tempArrowPrefab, 
-            startingPosition, 
+            tempArrowPrefab,
+            startingPosition,
             startingRotation
         );
 
         // arrow should not hit player on its way out
-        Physics.IgnoreCollision(playerCollider, arrowGameObject.GetComponent<Collider>());
-
-        if (arrowGameObject == null)
+        Collider arrowCollider = arrowGameObject.GetComponent<Collider>();
+        if (arrowCollider == null)
         {
             if (Debug.isDebugBuild)
-                Debug.LogError(
-                    "Temp Arrow Prefab is missing RigidBody component", 
-                    arrowGameObject
-                );
+                Debug.LogError("Temp Arrow Prefab is missing Collider component");
         }
         else
         {
-            TrailRenderer trailRenderer = arrowGameObject.GetComponentInChildren<TrailRenderer>();
+            Physics.IgnoreCollision(playerCollider, arrowCollider);
+        }
 
-            if (trailRenderer != null && showArrowTrail)
-                trailRenderer.emitting = true;
+        // show arrow trail
+        TrailRenderer trailRenderer = arrowGameObject.GetComponentInChildren<TrailRenderer>();
 
-            Rigidbody arrowRigidbody = arrowGameObject.GetComponent<Rigidbody>();
+        if (trailRenderer != null && showArrowTrail)
+            trailRenderer.emitting = true;
 
+        // make arrow fly forward
+        Rigidbody arrowRigidbody = arrowGameObject.GetComponent<Rigidbody>();
+
+        if (arrowRigidbody == null)
+        {
+            if (Debug.isDebugBuild)
+                Debug.LogError("Temp Arrow Prefab is missing RigidBody component");
+        }
+        else
+        {
             arrowRigidbody.isKinematic = false;
-            
+
             arrowRigidbody.velocity = arrowGameObject.transform.
                 TransformDirection(Vector3.forward) * thrust;
         }
-
-        // Arrow arrow = arrowGameObject.GetComponentInChildren<Arrow>();
-
-        // if (arrow != null)
-        //     arrow.inFlight = true;
     }
     # endregion
 }
