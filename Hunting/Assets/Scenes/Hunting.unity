@@ -1162,8 +1162,8 @@ MonoBehaviour:
   goat: {fileID: 85742587306721403, guid: aae9feb0ed5d75d45a618cac95bcdf57, type: 3}
   ibex: {fileID: 2774512154617643688, guid: e6c9f35454f85464194489fe891a06be, type: 3}
   boar: {fileID: 419677103769976500, guid: 8111a3b194f50a541958429c90b948fe, type: 3}
-  wolf: {fileID: 7514884817968456203, guid: ef1118b9b63d73d48ac337fff5624caf, type: 3}
-  bear: {fileID: 4028171670236487100, guid: ecb9d1e78ee698f4eb69fad6c6ca8015, type: 3}
+  wolf: {fileID: 7514884817968456203, guid: b4e39eab78eabe8b89224e4bbd17474b, type: 3}
+  bear: {fileID: 4028171670236487100, guid: aacec79a61738b3ca9841460ac58eb4f, type: 3}
   numRabbit: 3
   numDeer: 4
   numCattle: 1

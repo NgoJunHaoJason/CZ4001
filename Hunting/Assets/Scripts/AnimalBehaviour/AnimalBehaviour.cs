@@ -40,9 +40,6 @@ public abstract class AnimalBehaviour : MonoBehaviour
     private float obstacleDetectionRange;
 
     [SerializeField]
-    protected float attackInterval = 2;
-
-    [SerializeField]
     protected int idleActionInterval;
 
     [SerializeField]

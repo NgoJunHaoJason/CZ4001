@@ -8,34 +8,45 @@ public abstract class AggressiveAnimalBehaviour : AnimalBehaviour
     // when CarnivoreReach shuld be assigned; should update in the future
     [SerializeField]
     protected AnimalReach reach;
+
+    [SerializeField]
+    private float attackInterval = 2;
     # endregion
 
     # region Fields
-    protected float attackTimer = 0;
+    private float attackTimer = 0;
     # endregion
 
     # region Protected Methods
-    protected void Attack(bool isPlayer)
+    protected void Attack(bool isTargetPlayer)
     {
-        ChangeAnimation(AnimalAnimation.ATTACK);
-        destinationReached = true;
-        Turn();
-
-        if (isPlayer)
+        if (attackTimer >= attackInterval)
         {
-            PlayerHealth playerHealth = reach.PlayerInRange.GetComponentInChildren<PlayerHealth>();
-            if (playerHealth == null)
-                Debug.LogError("Player is missing PlayerHealth", playerHealth);
-            else if (!playerHealth.IsDead)
-                playerHealth.TakeDamage(10);
-        }
-        else if (reach is CarnivoreReach)
-        {
-            AnimalHealth animalHealth = ((CarnivoreReach) reach).HerbivoreInRange.GetComponentInChildren<AnimalHealth>();
-            animalHealth.TakeDamageFrom(gameObject, 2);
-        }
+            ChangeAnimation(AnimalAnimation.ATTACK);
+            destinationReached = true;
+            Turn();
 
-        attackTimer = 0;
+            if (isTargetPlayer)
+            {
+                PlayerHealth playerHealth = reach.PlayerInRange.GetComponentInChildren<PlayerHealth>();
+                
+                if (playerHealth == null)
+                    Debug.LogError("Player is missing PlayerHealth", playerHealth);
+                else if (!playerHealth.IsDead)
+                    playerHealth.TakeDamage(10);
+            }
+            else if (reach is CarnivoreReach)
+            {
+                AnimalHealth animalHealth = ((CarnivoreReach)reach).HerbivoreInRange.GetComponentInChildren<AnimalHealth>();
+                animalHealth.TakeDamageFrom(gameObject, 2);
+            }
+
+            attackTimer = 0;
+        }
+        else
+        {
+            attackTimer += Time.deltaTime;
+        }
     }
     # endregion
 }

@@ -22,11 +22,7 @@ public class BearBehaviour : AggressiveAnimalBehaviour
         }
         else if (reach.HasPlayerInRange || ((CarnivoreReach) reach).HasHerbivoreInRange)
         {
-            if (attackTimer >= attackInterval)
-            {
-                Attack(reach.HasPlayerInRange);  // prioritise attacking player
-                attackTimer = 0;
-            }
+            Attack(reach.HasPlayerInRange);  // prioritise attacking player
         }
         else if (sight.HasDeadAnimalInRange)
         {
@@ -51,8 +47,6 @@ public class BearBehaviour : AggressiveAnimalBehaviour
         {
             RandomIdle();
         }
-
-        attackTimer += Time.deltaTime;
     }
 
     protected override void RandomIdle()

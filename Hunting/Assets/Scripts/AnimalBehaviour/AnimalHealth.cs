@@ -15,8 +15,14 @@ public class AnimalHealth : MonoBehaviour
     # endregion
 
     #region Properties
+    /// <summary>
+    /// Used to check if this animal has ever been attacked by the player.
+    /// </summary>
     public bool AttackedByPlayer { get; private set; }
 
+    /// <summary>
+    /// Used to check if who got the last hit on this animal.
+    /// </summary>
     public GameObject LastAttackedBy { get; private set; }
 
     public bool ShouldFlee { get => currentHealth < fightFleeThreshold; }
@@ -64,17 +70,16 @@ public class AnimalHealth : MonoBehaviour
             }
             else
             {
-                currentHealth -= damage;
                 damageTimer = damageDelay;
             }
         }
         else
         {
-            recentlyDamaged = true;
             AttackedByPlayer = true;
-            currentHealth -= damage;
         }
 
+        currentHealth -= damage;
+        recentlyDamaged = true;
         LastAttackedBy = attacker;
 
         if (Debug.isDebugBuild)

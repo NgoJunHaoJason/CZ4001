@@ -16,11 +16,8 @@ public class AggressiveHerbivoreBehaviour : AggressiveAnimalBehaviour
         {
             if (health.ShouldFlee)
                 Flee();
-            else if (attackTimer >= attackInterval)
-            {
+            else
                 Attack(true);
-                attackTimer = 0;
-            }
         }
         else if (sight.HasPlayerInRange && health.AttackedByPlayer)
         {
@@ -48,8 +45,6 @@ public class AggressiveHerbivoreBehaviour : AggressiveAnimalBehaviour
         {
             RandomIdle();
         }
-
-        attackTimer += Time.deltaTime;
     }
 
     protected override void RandomIdle()
