@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 7514884817611340962}
   m_Layer: 10
   m_Name: Wolf_Neck_02SHJnt
-  m_TagString: Untagged
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -554,6 +554,8 @@ MonoBehaviour:
   walkSpeed: 2
   runSpeed: 7
   turnSpeed: 3
+  deathDuration: 30
+  dyingSpeed: 1e-10
   minMovableDistance: 12
   obstacleDetectionRange: 5
   idleActionInterval: 5

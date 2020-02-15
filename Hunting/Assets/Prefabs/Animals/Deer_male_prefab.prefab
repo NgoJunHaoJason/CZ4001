@@ -276,6 +276,8 @@ MonoBehaviour:
   walkSpeed: 1.2
   runSpeed: 4
   turnSpeed: 3
+  deathDuration: 30
+  dyingSpeed: 1e-10
   minMovableDistance: 12
   obstacleDetectionRange: 5
   idleActionInterval: 5
@@ -1621,7 +1623,7 @@ GameObject:
   - component: {fileID: 9105749535604064988}
   m_Layer: 10
   m_Name: Deer_Head_TopSHJnt
-  m_TagString: Untagged
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

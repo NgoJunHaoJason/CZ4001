@@ -874,11 +874,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d433117993024418d61cd1c2d347c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 5
   fightFleeThreshold: 0
   damageDelay: 0.5
-  attackedByPlayer: 0
-  lastAttackedBy: {fileID: 0}
 --- !u!1 &4028171670109483751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,13 +1012,15 @@ MonoBehaviour:
   walkSpeed: 1
   runSpeed: 4
   turnSpeed: 3
+  deathDuration: 30
+  dyingSpeed: 1e-10
   minMovableDistance: 10
   obstacleDetectionRange: 5
-  attackInterval: 2
   idleActionInterval: 5
   health: {fileID: 4028171670079555939}
   sight: {fileID: 4028171669651284268}
   reach: {fileID: 838169553202382193}
+  attackInterval: 2
 --- !u!82 &4028171670874748023
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1488,7 +1488,7 @@ GameObject:
   - component: {fileID: 4028171670883791125}
   m_Layer: 10
   m_Name: Bear_Head_TopSHJnt
-  m_TagString: Untagged
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
