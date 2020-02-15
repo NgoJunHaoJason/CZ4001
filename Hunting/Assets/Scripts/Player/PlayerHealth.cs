@@ -127,10 +127,6 @@ public class PlayerHealth : MonoBehaviour
 
         playerAudioSource.Play();
 
-        if (Debug.isDebugBuild)
-            Debug.Log("Player took damage and lost <color=Red>" + 
-                amount.ToString() + "</color> health.");
-
         if (currentHealth <= 0 && !isDead)
             Die();
     }

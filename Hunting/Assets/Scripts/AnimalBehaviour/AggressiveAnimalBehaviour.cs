@@ -11,6 +11,9 @@ public abstract class AggressiveAnimalBehaviour : AnimalBehaviour
 
     [SerializeField]
     private float attackInterval = 2;
+
+    [SerializeField]
+    private int attackPower = 10;
     # endregion
 
     # region Fields
@@ -33,7 +36,13 @@ public abstract class AggressiveAnimalBehaviour : AnimalBehaviour
                 if (playerHealth == null)
                     Debug.LogError("Player is missing PlayerHealth", playerHealth);
                 else if (!playerHealth.IsDead)
-                    playerHealth.TakeDamage(10);
+                {
+                    playerHealth.TakeDamage(attackPower);
+
+                    if (Debug.isDebugBuild)
+                        Debug.Log(this.gameObject.name + " dealt <color=Red>" + 
+                            attackPower.ToString() + "</color> to the Player.");
+                }
             }
             else if (reach is CarnivoreReach)
             {
