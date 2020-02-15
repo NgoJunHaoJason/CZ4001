@@ -56,7 +56,7 @@ public class AnimalSight : MonoBehaviour
         if (!animalBehaviour || !animalHealth)
             return;
 
-        if (animalHealth.IsDead())
+        if (animalHealth.IsDead)
             deadAnimalInRange = other.gameObject;
         else if (animalBehaviour.Category == AnimalBehaviour.AnimalCategory.HERBIVORE)
         {

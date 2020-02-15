@@ -8,7 +8,7 @@ public class BearBehaviour : AggressiveAnimalBehaviour
         if (currentAnimation == AnimalAnimation.DIE)
             return;
 
-        if (health.IsDead())
+        if (health.IsDead)
         {
             Die();
         }

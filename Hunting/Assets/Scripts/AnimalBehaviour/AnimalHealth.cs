@@ -1,21 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
 
 public class AnimalHealth : MonoBehaviour
 {
-    public float maxHealth;
+    # region Serialize Fields
+    [SerializeField]
+    private float maxHealth = 3;
     
-    public float fightFleeThreshold;
-    public float damageDelay;
+    [SerializeField]
+    private float fightFleeThreshold = 0;
 
-    public bool attackedByPlayer = false;
-    public GameObject lastAttackedBy;
+    [SerializeField]
+    public float damageDelay = 0.5f; // time interval before damage can be taken
+    # endregion
+
+    #region Properties
+    public bool AttackedByPlayer { get; private set; }
+
+    public GameObject LastAttackedBy { get; private set; }
+
+    public bool ShouldFlee { get => currentHealth < fightFleeThreshold; }
+
+    public bool IsDead { get => currentHealth <= 0;}
+    # endregion
+
+    #region Fields
 
     private bool recentlyDamaged = false;
-    private float currentHealth;
-    private float damageTimer = 0;
 
+    private float currentHealth = 3;
+
+    private float damageTimer = 0;
+    # endregion
+
+    #region MonoBehaviour Methods
     private void Start()
     {
         currentHealth = maxHealth;
@@ -32,7 +50,9 @@ public class AnimalHealth : MonoBehaviour
             TakeDamageFrom(player);
         }
     }
-
+    #endregion
+    
+    # region Public Methods
     public void TakeDamageFrom(GameObject attacker, int damage=1)
     {
         if (attacker != GameObject.FindGameObjectWithTag("Player"))
@@ -51,24 +71,14 @@ public class AnimalHealth : MonoBehaviour
         else
         {
             recentlyDamaged = true;
-            attackedByPlayer = true;
-            currentHealth--;
+            AttackedByPlayer = true;
+            currentHealth -= damage;
         }
 
-        lastAttackedBy = attacker;
+        LastAttackedBy = attacker;
 
         if (Debug.isDebugBuild)
             Debug.Log("Animal took damage; current health: " + currentHealth.ToString());
-    }
-
-    public bool IsDead()
-    {
-        return currentHealth <= 0;
-    }
-
-    public bool ShouldFlee()
-    {
-        return currentHealth < fightFleeThreshold;
     }
 
     public bool IsRecentlyDamaged()
@@ -78,14 +88,10 @@ public class AnimalHealth : MonoBehaviour
             recentlyDamaged = false;
             return true;
         }
-
-        return recentlyDamaged;
+        else
+        {
+            return false;
+        }
     }
-
-    public GameObject GetAttacker()
-    {
-        return lastAttackedBy;
-    }
-
-
+    # endregion
 }

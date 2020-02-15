@@ -9,7 +9,7 @@ public class PassiveAnimalBehaviour : AnimalBehaviour
         if (currentAnimation == AnimalAnimation.DIE)
             return;
 
-        if (health.IsDead())
+        if (health.IsDead)
         {
             Die();
         }

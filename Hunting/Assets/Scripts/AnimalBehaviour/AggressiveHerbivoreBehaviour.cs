@@ -8,13 +8,13 @@ public class AggressiveHerbivoreBehaviour : AggressiveAnimalBehaviour
         if (currentAnimation == AnimalAnimation.DIE)
             return;
 
-        if (health.IsDead())
+        if (health.IsDead)
         {
             Die();
         }
-        else if (reach.HasPlayerInRange && health.attackedByPlayer)
+        else if (reach.HasPlayerInRange && health.AttackedByPlayer)
         {
-            if (health.ShouldFlee())
+            if (health.ShouldFlee)
                 Flee();
             else if (attackTimer >= attackInterval)
             {
@@ -22,9 +22,9 @@ public class AggressiveHerbivoreBehaviour : AggressiveAnimalBehaviour
                 attackTimer = 0;
             }
         }
-        else if (sight.HasPlayerInRange && health.attackedByPlayer)
+        else if (sight.HasPlayerInRange && health.AttackedByPlayer)
         {
-            if (health.ShouldFlee())
+            if (health.ShouldFlee)
                 Flee();
             else 
                 Chase(sight.PlayerInRange);

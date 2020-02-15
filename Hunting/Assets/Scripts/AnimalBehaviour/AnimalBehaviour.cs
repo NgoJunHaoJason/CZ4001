@@ -215,7 +215,7 @@ public abstract class AnimalBehaviour : MonoBehaviour
     public void Die()
     {
         ChangeAnimation(AnimalAnimation.DIE);
-        if (GameObject.FindGameObjectWithTag("Player") == health.GetAttacker())
+        if (GameObject.FindGameObjectWithTag("Player") == health.LastAttackedBy)
             gameLoader.SubmitHuntedAnimal(animalType);
         Destroy(gameObject, 30f);
     }
