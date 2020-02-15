@@ -5,8 +5,8 @@ public class WolfBehaviour : AggressiveAnimalBehaviour
 {
     void FixedUpdate()
     {
-        if (currentAnimation == AnimalAnimation.DIE)
-            return;
+        // if (currentAnimation == AnimalAnimation.DIE)
+        //     return;
 
         if (health.IsDead)
         {

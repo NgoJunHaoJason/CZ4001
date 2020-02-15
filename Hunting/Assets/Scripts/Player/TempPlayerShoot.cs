@@ -103,10 +103,10 @@ public class TempPlayerShoot : MonoBehaviour
                 TransformDirection(Vector3.forward) * thrust;
         }
 
-        Arrow arrow = arrowGameObject.GetComponentInChildren<Arrow>();
+        // Arrow arrow = arrowGameObject.GetComponentInChildren<Arrow>();
 
-        if (arrow != null)
-            arrow.inFlight = true;
+        // if (arrow != null)
+        //     arrow.inFlight = true;
     }
     # endregion
 }

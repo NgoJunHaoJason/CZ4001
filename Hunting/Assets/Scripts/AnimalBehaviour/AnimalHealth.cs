@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 
 
+[RequireComponent(typeof(Rigidbody))]
 public class AnimalHealth : MonoBehaviour
 {
     # region Serialize Fields
     [SerializeField]
     private float maxHealth = 3;
-    
+
     [SerializeField]
     private float fightFleeThreshold = 0;
 
@@ -27,7 +28,7 @@ public class AnimalHealth : MonoBehaviour
 
     public bool ShouldFlee { get => currentHealth < fightFleeThreshold; }
 
-    public bool IsDead { get => currentHealth <= 0;}
+    public bool IsDead { get => currentHealth <= 0; }
     # endregion
 
     #region Fields
@@ -35,8 +36,6 @@ public class AnimalHealth : MonoBehaviour
     private bool recentlyDamaged = false;
 
     private float currentHealth = 3;
-
-    private float damageTimer = 0;
     # endregion
 
     #region MonoBehaviour Methods
@@ -49,41 +48,30 @@ public class AnimalHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Arrow"))
         {
-            if (Debug.isDebugBuild)
-                Debug.Log("Arrow collided with " + gameObject.name);
-            
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             TakeDamageFrom(player);
         }
     }
     #endregion
-    
-    # region Public Methods
-    public void TakeDamageFrom(GameObject attacker, int damage=1)
-    {
-        if (attacker != GameObject.FindGameObjectWithTag("Player"))
-        {
-            if (damageTimer > 0)
-            {
-                damageTimer -= Time.deltaTime;
-                return;
-            }
-            else
-            {
-                damageTimer = damageDelay;
-            }
-        }
-        else
-        {
-            AttackedByPlayer = true;
-        }
 
+    #region Public Methods
+    public void TakeDamageFrom(GameObject attacker, int damage = 1)
+    {
         currentHealth -= damage;
+
         recentlyDamaged = true;
         LastAttackedBy = attacker;
+        AttackedByPlayer = attacker.CompareTag("Player");
 
         if (Debug.isDebugBuild)
             Debug.Log("Animal took damage; current health: " + currentHealth.ToString());
+
+        if (IsDead)
+        {
+            Rigidbody animalRigidbody = this.GetComponent<Rigidbody>();
+            animalRigidbody.isKinematic = true; // ignore physics
+            animalRigidbody.constraints = RigidbodyConstraints.None;
+        }
     }
 
     public bool IsRecentlyDamaged()
