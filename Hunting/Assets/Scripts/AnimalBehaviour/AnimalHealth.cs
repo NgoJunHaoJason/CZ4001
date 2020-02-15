@@ -6,7 +6,7 @@ public class AnimalHealth : MonoBehaviour
 {
     # region Serialize Fields
     [SerializeField]
-    private float maxHealth = 3;
+    private int maxHealth = 3;
 
     [SerializeField]
     private float fightFleeThreshold = 0;
@@ -35,7 +35,7 @@ public class AnimalHealth : MonoBehaviour
 
     private bool recentlyDamaged = false;
 
-    private float currentHealth = 3;
+    private int currentHealth = 3;
     # endregion
 
     #region MonoBehaviour Methods
@@ -48,8 +48,12 @@ public class AnimalHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Arrow"))
         {
+            // get the specific collider of the animal that the arrow hit
+            Collider collider = collision.GetContact(0).thisCollider;
+            bool hitHead = collider.gameObject.CompareTag("Head");
+
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            TakeDamageFrom(player);
+            TakeDamageFrom(player, hitHead? maxHealth : 1); // OHKO if headshot
         }
     }
     #endregion
