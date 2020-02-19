@@ -27,4 +27,17 @@ public class BirdBehaviour : MonoBehaviour
             gameController.SubmitHuntedAnimal(AnimalType.Bird);
         }
     }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        Debug.Log("hit by " + collision.gameObject.tag);
+        if (collision.gameObject.CompareTag("Arrow"))
+        {
+
+            Debug.Log("hit by arrow! " + collision.gameObject.tag);
+            // Collider collider = collision.GetContact(0).thisCollider;
+            birdController.KillBird();
+            gameController.SubmitHuntedAnimal(AnimalType.Bird);
+        }
+    }
 }
