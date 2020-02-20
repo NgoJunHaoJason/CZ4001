@@ -118,9 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3203d74de1dbc4682e8b6b1548029e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: {fileID: 0}
-  herbivoreInRange: {fileID: 0}
-  deadAnimalInRange: {fileID: 0}
 --- !u!1 &2774512153490426759
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,10 +595,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41e7f00ba0a6e14f82910d2d5b1bb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: {fileID: 0}
-  herbivoresInRange: []
-  carnivoresInRange: []
-  deadAnimalInRange: {fileID: 0}
 --- !u!135 &2774512153939878400
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1055,20 +1048,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4ba187cbc696d44be6cb7074be3591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charController: {fileID: 6556176135218440487}
-  animator: {fileID: 2774512154617643693}
-  health: {fileID: 2774512154617643691}
-  sight: {fileID: 2774512153939878415}
-  reach: {fileID: 2774512153432943104}
-  audioSource: {fileID: 2774512153406232538}
   animalCategory: 0
   animalType: 4
-  minMovableDistance: 12
   walkSpeed: 1
   runSpeed: 4
   turnSpeed: 3
+  deathDuration: 30
+  dyingSpeed: 1e-10
+  minMovableDistance: 12
   obstacleDetectionRange: 5
   idleActionInterval: 5
+  health: {fileID: 2774512154617643691}
+  sight: {fileID: 2774512153939878415}
+  reach: {fileID: 2774512153432943104}
   attackInterval: 2
 --- !u!82 &2774512153406232538
 AudioSource:
@@ -1261,8 +1253,6 @@ MonoBehaviour:
   maxHealth: 2
   fightFleeThreshold: 0
   damageDelay: 0.5
-  attackedByPlayer: 0
-  lastAttackedBy: {fileID: 0}
 --- !u!1 &2774512154689037797
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,7 +1358,7 @@ GameObject:
   - component: {fileID: 2774512154791143217}
   m_Layer: 10
   m_Name: Ibex_Head_TopSHJnt
-  m_TagString: Untagged
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,38 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class CattleBehaviour : AnimalBehaviour
+
+public class AggressiveHerbivoreBehaviour : AggressiveAnimalBehaviour
 {
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (currentAnimation == AnimalAnimation.DIE)
-            return;
-
-        if (health.IsDead())
+        if (health.IsDead)
         {
             Die();
         }
-        else if (reach.playerInRange && health.attackedByPlayer)
+        else if (reach.HasPlayerInRange && health.AttackedByPlayer)
         {
-            if (health.ShouldFlee())
+            if (health.ShouldFlee)
                 Flee();
-            else 
+            else
                 Attack(true);
         }
-        else if (sight.playerInRange && health.attackedByPlayer)
+        else if (sight.HasPlayerInRange && health.AttackedByPlayer)
         {
-            if (health.ShouldFlee())
+            if (health.ShouldFlee)
                 Flee();
             else 
-                Chase(sight.playerInRange);
+                Chase(sight.PlayerInRange);
         }
         else if (health.IsRecentlyDamaged())
         {
             Flee();
         }
-        else if (sight.carnivoresInRange.Count > 0)
+        else if (sight.HasCarnivoreInRange)
         {
             Flee();
         }
@@ -47,10 +42,9 @@ public class CattleBehaviour : AnimalBehaviour
         {
             RandomIdle();
         }
-
     }
 
-    public override void RandomIdle()
+    protected override void RandomIdle()
     {
         if (actionTimer > 0)
         {
@@ -78,7 +72,7 @@ public class CattleBehaviour : AnimalBehaviour
 
     }
 
-    public override void ChangeAnimation(AnimalAnimation newAnimation)
+    protected override void ChangeAnimation(AnimalAnimation newAnimation)
     {
         if (currentAnimation != newAnimation)
         {

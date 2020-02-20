@@ -10,25 +10,20 @@
 public class TempPlayerMovement : MonoBehaviour
 {
     # region Serialize Fields
-
     [SerializeField]
     private int movementSpeed = 3;
 
     [SerializeField]
     private int jumpingForce = 3;
-
     # endregion
 
     # region Fields
-
     private Rigidbody playerRigidbody = null;
 
     private bool isGrounded = true;
-
     # endregion
 
     # region MonoBehaviour Methods
-
     void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody>();
@@ -47,11 +42,9 @@ public class TempPlayerMovement : MonoBehaviour
             isGrounded = true;
         }
     }
-
     # endregion
 
     # region Private Methods
-
     private void Move()
     {
         float horizontalAxis = Input.GetAxis("Horizontal");
@@ -69,7 +62,6 @@ public class TempPlayerMovement : MonoBehaviour
             isGrounded = false;
         }
     }
-
     # endregion
 }
 

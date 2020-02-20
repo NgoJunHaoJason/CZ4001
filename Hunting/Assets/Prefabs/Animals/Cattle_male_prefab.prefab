@@ -118,9 +118,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3203d74de1dbc4682e8b6b1548029e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: {fileID: 0}
-  herbivoreInRange: {fileID: 0}
-  deadAnimalInRange: {fileID: 0}
 --- !u!1 &4168145503993186001
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,20 +688,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4ba187cbc696d44be6cb7074be3591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charController: {fileID: 7584924962031212004}
-  animator: {fileID: 4168145504452403441}
-  health: {fileID: 4168145505112091067}
-  sight: {fileID: 4168145505856579654}
-  reach: {fileID: 4168145503967034945}
-  audioSource: {fileID: 4168145505668610296}
   animalCategory: 0
   animalType: 2
-  minMovableDistance: 10
   walkSpeed: 1
   runSpeed: 4
   turnSpeed: 3
+  deathDuration: 30
+  dyingSpeed: 1e-10
+  minMovableDistance: 10
   obstacleDetectionRange: 5
   idleActionInterval: 5
+  health: {fileID: 4168145505112091067}
+  sight: {fileID: 4168145505856579654}
+  reach: {fileID: 4168145503967034945}
   attackInterval: 2
 --- !u!82 &4168145505668610296
 AudioSource:
@@ -1442,11 +1438,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d433117993024418d61cd1c2d347c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 3
   fightFleeThreshold: 0
   damageDelay: 0.5
-  attackedByPlayer: 0
-  lastAttackedBy: {fileID: 0}
 --- !u!1 &4168145505167677266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1594,10 +1588,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4168145505205101516}
   - component: {fileID: 4168145505205101517}
+  - component: {fileID: 7360912059119522695}
   - component: {fileID: 4168145505205101514}
   m_Layer: 10
   m_Name: Cow_Head_TopSHJnt
-  m_TagString: Untagged
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1629,8 +1624,21 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.4, z: 0.1}
-  m_Center: {x: 0, y: 0.1, z: -0.1}
+  m_Size: {x: 0.15, y: 0.35, z: 0.1}
+  m_Center: {x: -0.18, y: 0, z: -0.1}
+--- !u!65 &7360912059119522695
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4168145505205101519}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15, y: 0.4, z: 0.1}
+  m_Center: {x: 0.2, y: 0, z: -0.1}
 --- !u!136 &4168145505205101514
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2152,10 +2160,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41e7f00ba0a6e14f82910d2d5b1bb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: {fileID: 0}
-  herbivoresInRange: []
-  carnivoresInRange: []
-  deadAnimalInRange: {fileID: 0}
 --- !u!135 &4168145505856579655
 SphereCollider:
   m_ObjectHideFlags: 0

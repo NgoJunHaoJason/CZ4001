@@ -2,10 +2,14 @@
 
 public class TempGameManager : MonoBehaviour
 {
+    # region MonoBehaviour Methods
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Debug.Log("cursor lock state is " + Cursor.lockState.ToString());
+
+        if (Debug.isDebugBuild)
+            Debug.Log("cursor lock state is " + Cursor.lockState.ToString());
     }
 
     void Update()
@@ -16,4 +20,6 @@ public class TempGameManager : MonoBehaviour
                 CursorLockMode.None : CursorLockMode.Locked;
         }
     }
+
+    # endregion
 }

@@ -271,21 +271,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d3954df063c5144b7e23bb302fc1f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charController: {fileID: 5590174035617149682}
-  animator: {fileID: 9105749534568517693}
-  health: {fileID: 9105749535371559144}
-  sight: {fileID: 9105749535528221764}
-  reach: {fileID: 0}
-  audioSource: {fileID: 9105749534697031681}
   animalCategory: 0
   animalType: 1
-  minMovableDistance: 12
   walkSpeed: 1.2
   runSpeed: 4
   turnSpeed: 3
+  deathDuration: 30
+  dyingSpeed: 1e-10
+  minMovableDistance: 12
   obstacleDetectionRange: 5
   idleActionInterval: 5
-  attackInterval: 2
+  health: {fileID: 9105749535371559144}
+  sight: {fileID: 9105749535528221764}
 --- !u!82 &9105749534697031681
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1302,11 +1299,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d433117993024418d61cd1c2d347c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 2
   fightFleeThreshold: 0
   damageDelay: 0.5
-  attackedByPlayer: 0
-  lastAttackedBy: {fileID: 0}
 --- !u!1 &9105749535393801757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,10 +1470,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41e7f00ba0a6e14f82910d2d5b1bb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: {fileID: 0}
-  herbivoresInRange: []
-  carnivoresInRange: []
-  deadAnimalInRange: {fileID: 0}
 --- !u!135 &9105749535528221763
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1632,7 +1623,7 @@ GameObject:
   - component: {fileID: 9105749535604064988}
   m_Layer: 10
   m_Name: Deer_Head_TopSHJnt
-  m_TagString: Untagged
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

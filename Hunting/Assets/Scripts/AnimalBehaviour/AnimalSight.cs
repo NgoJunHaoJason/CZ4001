@@ -1,14 +1,41 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
 
+
 public class AnimalSight : MonoBehaviour
 {
-    public GameObject playerInRange = null;
-    public List<GameObject> herbivoresInRange = new List<GameObject>();
-    public List<GameObject> carnivoresInRange = new List<GameObject>();
-    public GameObject deadAnimalInRange = null;
+    # region Properties
+
+    public GameObject PlayerInRange { get => playerInRange; }
+
+    public bool HasPlayerInRange { get => playerInRange != null; }
+
+    public GameObject DeadAnimalInRange { get => deadAnimalInRange; }
+
+    public bool HasDeadAnimalInRange { get => deadAnimalInRange != null; }
+
+    public bool HasCarnivoreInRange { get => carnivoresInRange.Count > 0; }
+
+    public GameObject FirstHerbivoreInRange { get => herbivoresInRange[0]; }
+
+    public bool HasHerbivoreInRange { get => herbivoresInRange.Count > 0; }
+
+    # endregion
+
+    # region Fields
+
+    private GameObject playerInRange = null;
+
+    private GameObject deadAnimalInRange = null;
+
+    private List<GameObject> carnivoresInRange = new List<GameObject>();
+
+    private List<GameObject> herbivoresInRange = new List<GameObject>();
+
+    # endregion
+
+    # region Private Methods
 
     private void OnTriggerStay(Collider other)
     {
@@ -29,15 +56,15 @@ public class AnimalSight : MonoBehaviour
         if (!animalBehaviour || !animalHealth)
             return;
 
-        if (animalHealth.IsDead())
+        if (animalHealth.IsDead)
             deadAnimalInRange = other.gameObject;
-        else if (animalBehaviour.animalCategory == AnimalBehaviour.AnimalCategory.HERBIVORE)
+        else if (animalBehaviour.Category == AnimalBehaviour.AnimalCategory.HERBIVORE)
         {
             if (herbivoresInRange.Contains(other.gameObject))
                 return;
             else herbivoresInRange.Add(other.gameObject);
         }
-        else if (animalBehaviour.animalCategory == AnimalBehaviour.AnimalCategory.CARNIVORE)
+        else if (animalBehaviour.Category == AnimalBehaviour.AnimalCategory.CARNIVORE)
         {
             if (carnivoresInRange.Contains(other.gameObject))
                 return;
@@ -59,11 +86,11 @@ public class AnimalSight : MonoBehaviour
 
         if (animalBehaviour == null)
             return;
-        else if (animalBehaviour.animalCategory == AnimalBehaviour.AnimalCategory.HERBIVORE)
+        else if (animalBehaviour.Category == AnimalBehaviour.AnimalCategory.HERBIVORE)
             herbivoresInRange.Remove(other.gameObject);
-        else if (animalBehaviour.animalCategory == AnimalBehaviour.AnimalCategory.CARNIVORE)
+        else if (animalBehaviour.Category == AnimalBehaviour.AnimalCategory.CARNIVORE)
             carnivoresInRange.Remove(other.gameObject);
-
     }
 
+    # endregion
 }

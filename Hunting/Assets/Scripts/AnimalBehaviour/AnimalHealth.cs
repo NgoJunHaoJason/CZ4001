@@ -1,21 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+
+[RequireComponent(typeof(Rigidbody))]
 public class AnimalHealth : MonoBehaviour
 {
-    public float maxHealth;
-    
-    public float fightFleeThreshold;
-    public float damageDelay;
+    # region Serialize Fields
+    [SerializeField]
+    private int maxHealth = 3;
 
-    public bool attackedByPlayer = false;
-    public GameObject lastAttackedBy;
+    [SerializeField]
+    private float fightFleeThreshold = 0;
+
+    [SerializeField]
+    public float damageDelay = 0.5f; // time interval before damage can be taken
+    # endregion
+
+    #region Properties
+    /// <summary>
+    /// Used to check if this animal has ever been attacked by the player.
+    /// </summary>
+    public bool AttackedByPlayer { get; private set; }
+
+    /// <summary>
+    /// Used to check if who got the last hit on this animal.
+    /// </summary>
+    public GameObject LastAttackedBy { get; private set; }
+
+    public bool ShouldFlee { get => currentHealth < fightFleeThreshold; }
+
+    public bool IsDead { get => currentHealth <= 0; }
+    # endregion
+
+    #region Fields
 
     private bool recentlyDamaged = false;
-    private float currentHealth;
-    private float damageTimer = 0;
 
+    private int currentHealth = 3;
+    # endregion
+
+    #region MonoBehaviour Methods
     private void Start()
     {
         currentHealth = maxHealth;
@@ -25,50 +48,34 @@ public class AnimalHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Arrow"))
         {
-            if (Debug.isDebugBuild)
-                Debug.Log("Arrow collided with " + gameObject.name);
-            
+            // get the specific collider of the animal that the arrow hit
+            Collider collider = collision.GetContact(0).thisCollider;
+            bool hitHead = collider.gameObject.CompareTag("Head");
+
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            TakeDamageFrom(player);
+            TakeDamageFrom(player, hitHead? maxHealth : 1); // OHKO if headshot
         }
     }
+    #endregion
 
-    public void TakeDamageFrom(GameObject attacker)
+    #region Public Methods
+    public void TakeDamageFrom(GameObject attacker, int damage = 1)
     {
-        if (attacker != GameObject.FindGameObjectWithTag("Player"))
-        {
-            if (damageTimer > 0)
-            {
-                damageTimer -= Time.deltaTime;
-                return;
-            }
-            else
-            {
-                currentHealth -= 0.1f;
-                damageTimer = damageDelay;
-            }
-        }
-        else
-        {
-            recentlyDamaged = true;
-            attackedByPlayer = true;
-            currentHealth--;
-        }
+        currentHealth -= damage;
 
-        lastAttackedBy = attacker;
+        recentlyDamaged = true;
+        LastAttackedBy = attacker;
+        AttackedByPlayer = attacker.CompareTag("Player");
 
         if (Debug.isDebugBuild)
             Debug.Log("Animal took damage; current health: " + currentHealth.ToString());
-    }
 
-    public bool IsDead()
-    {
-        return currentHealth <= 0;
-    }
-
-    public bool ShouldFlee()
-    {
-        return currentHealth < fightFleeThreshold;
+        if (IsDead)
+        {
+            Rigidbody animalRigidbody = this.GetComponent<Rigidbody>();
+            animalRigidbody.isKinematic = true; // ignore physics
+            animalRigidbody.constraints = RigidbodyConstraints.None;
+        }
     }
 
     public bool IsRecentlyDamaged()
@@ -78,14 +85,10 @@ public class AnimalHealth : MonoBehaviour
             recentlyDamaged = false;
             return true;
         }
-
-        return recentlyDamaged;
+        else
+        {
+            return false;
+        }
     }
-
-    public GameObject GetAttacker()
-    {
-        return lastAttackedBy;
-    }
-
-
+    # endregion
 }

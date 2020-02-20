@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using VRTK.Examples.Archery;
 
 
 // reference: scripts within
@@ -7,7 +8,6 @@
 public class TempPlayerShoot : MonoBehaviour
 {
     # region Serialize Fields
-
     [SerializeField]
     private GameObject tempArrowPrefab = null;
 
@@ -19,21 +19,17 @@ public class TempPlayerShoot : MonoBehaviour
 
     [SerializeField]
     private bool showArrowTrail = true;
-
     # endregion
 
     # region Fields
-
     private Camera playerCamera = null;
 
     private Collider playerCollider = null;
 
     private float shootTimer = 0;
-
     # endregion
 
     # region MonoBehaviour Methods
-
     void Start()
     {
         playerCollider = GetComponent<Collider>();
@@ -58,11 +54,9 @@ public class TempPlayerShoot : MonoBehaviour
             shootTimer = 0;
         }
     }
-
     # endregion
 
     # region Private Methods
-
     private void ShootArrow()
     {
         Vector3 startingPosition = playerCamera.transform.position;
@@ -83,6 +77,7 @@ public class TempPlayerShoot : MonoBehaviour
             startingRotation
         );
 
+        // arrow should not hit player on its way out
         Physics.IgnoreCollision(playerCollider, arrowGameObject.GetComponent<Collider>());
 
         if (arrowGameObject == null)
@@ -108,8 +103,10 @@ public class TempPlayerShoot : MonoBehaviour
                 TransformDirection(Vector3.forward) * thrust;
         }
 
-        arrowGameObject.GetComponentInChildren<VRTK.Examples.Archery.Arrow>().inFlight = true;
-    }
+        // Arrow arrow = arrowGameObject.GetComponentInChildren<Arrow>();
 
+        // if (arrow != null)
+        //     arrow.inFlight = true;
+    }
     # endregion
 }

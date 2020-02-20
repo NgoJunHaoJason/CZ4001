@@ -1,21 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class DeerBehaviour : AnimalBehaviour
+public class PassiveAnimalBehaviour : AnimalBehaviour
 {
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (currentAnimation == AnimalAnimation.DIE)
-            return;
-
-        if (health.IsDead())
+        if (health.IsDead)
         {
             Die();
         }
-        else if (sight.playerInRange || sight.carnivoresInRange.Count > 0)
+        else if (sight.HasPlayerInRange || sight.HasCarnivoreInRange)
         {
             Flee();
         }
@@ -30,10 +25,9 @@ public class DeerBehaviour : AnimalBehaviour
         {
             RandomIdle();
         }
-
     }
 
-    public override void RandomIdle()
+    protected override void RandomIdle()
     {
         if (actionTimer > 0)
         {
@@ -60,8 +54,7 @@ public class DeerBehaviour : AnimalBehaviour
 
     }
 
-
-    public override void ChangeAnimation(AnimalAnimation newAnimation)
+    protected override void ChangeAnimation(AnimalAnimation newAnimation)
     {
         if (currentAnimation != newAnimation)
         {

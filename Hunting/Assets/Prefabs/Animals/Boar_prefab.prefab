@@ -271,10 +271,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41e7f00ba0a6e14f82910d2d5b1bb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: {fileID: 0}
-  herbivoresInRange: []
-  carnivoresInRange: []
-  deadAnimalInRange: {fileID: 0}
 --- !u!1 &419677103233302941
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,7 +720,7 @@ GameObject:
   - component: {fileID: 5416081543160862981}
   - component: {fileID: 2155760795617972036}
   m_Layer: 0
-  m_Name: Wild_boar_prefab
+  m_Name: Boar_prefab
   m_TagString: Boar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -779,20 +775,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4ba187cbc696d44be6cb7074be3591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charController: {fileID: 2155760795617972036}
-  animator: {fileID: 419677103769976503}
-  health: {fileID: 419677104602452401}
-  sight: {fileID: 419677103208608025}
-  reach: {fileID: 419677104421706456}
-  audioSource: {fileID: 419677104016227631}
   animalCategory: 0
   animalType: 5
-  minMovableDistance: 12
   walkSpeed: 1
   runSpeed: 4
   turnSpeed: 3
+  deathDuration: 30
+  dyingSpeed: 1e-10
+  minMovableDistance: 12
   obstacleDetectionRange: 5
   idleActionInterval: 5
+  health: {fileID: 419677104602452401}
+  sight: {fileID: 419677103208608025}
+  reach: {fileID: 419677104421706456}
   attackInterval: 2
 --- !u!82 &419677104016227631
 AudioSource:
@@ -1417,9 +1412,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3203d74de1dbc4682e8b6b1548029e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: {fileID: 0}
-  herbivoreInRange: {fileID: 0}
-  deadAnimalInRange: {fileID: 0}
 --- !u!1 &419677104529830492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1576,8 +1568,6 @@ MonoBehaviour:
   maxHealth: 2
   fightFleeThreshold: 0
   damageDelay: 0.5
-  attackedByPlayer: 0
-  lastAttackedBy: {fileID: 0}
 --- !u!1 &419677104635334173
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,7 +1860,7 @@ GameObject:
   - component: {fileID: 419677104779015904}
   m_Layer: 10
   m_Name: WildBoar_Head_TopSHJnt
-  m_TagString: Untagged
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

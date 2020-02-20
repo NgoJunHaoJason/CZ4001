@@ -511,10 +511,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41e7f00ba0a6e14f82910d2d5b1bb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: {fileID: 0}
-  herbivoresInRange: []
-  carnivoresInRange: []
-  deadAnimalInRange: {fileID: 0}
 --- !u!135 &85742586736641943
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -539,9 +535,10 @@ GameObject:
   - component: {fileID: 85742586784523052}
   - component: {fileID: 85742586784523050}
   - component: {fileID: 85742586784523051}
+  - component: {fileID: 8994165114365455259}
   m_Layer: 10
   m_Name: Goat_Head_TopSHJnt
-  m_TagString: Untagged
+  m_TagString: Head
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -587,8 +584,21 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.1, z: 0.2}
-  m_Center: {x: 0, y: 0, z: -0.15}
+  m_Size: {x: 0.07, y: 0.06, z: 0.2}
+  m_Center: {x: 0.07, y: 0, z: -0.15}
+--- !u!65 &8994165114365455259
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85742586784523049}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.07, y: 0.06, z: 0.2}
+  m_Center: {x: -0.07, y: 0, z: -0.15}
 --- !u!1 &85742586819325299
 GameObject:
   m_ObjectHideFlags: 0
@@ -929,9 +939,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c3203d74de1dbc4682e8b6b1548029e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: {fileID: 0}
-  herbivoreInRange: {fileID: 0}
-  deadAnimalInRange: {fileID: 0}
 --- !u!1 &85742587098897122
 GameObject:
   m_ObjectHideFlags: 0
@@ -1125,20 +1132,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4ba187cbc696d44be6cb7074be3591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charController: {fileID: 1710828945783561824}
-  animator: {fileID: 85742587306721392}
-  health: {fileID: 85742587306721406}
-  sight: {fileID: 85742586736641942}
-  reach: {fileID: 85742587090980748}
-  audioSource: {fileID: 85742586266386554}
   animalCategory: 0
   animalType: 3
-  minMovableDistance: 12
   walkSpeed: 1
   runSpeed: 4
   turnSpeed: 3
+  deathDuration: 30
+  dyingSpeed: 1e-10
+  minMovableDistance: 12
   obstacleDetectionRange: 5
   idleActionInterval: 5
+  health: {fileID: 85742587306721406}
+  sight: {fileID: 85742586736641942}
+  reach: {fileID: 85742587090980748}
   attackInterval: 2
 --- !u!82 &85742586266386554
 AudioSource:
@@ -1331,8 +1337,6 @@ MonoBehaviour:
   maxHealth: 2
   fightFleeThreshold: 0
   damageDelay: 0.5
-  attackedByPlayer: 0
-  lastAttackedBy: {fileID: 0}
 --- !u!1 &85742587357122031
 GameObject:
   m_ObjectHideFlags: 0
