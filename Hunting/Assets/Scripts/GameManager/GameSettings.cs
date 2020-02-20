@@ -4,6 +4,7 @@ using UnityEngine;
 using VRTK;
 using TMPro;
 using UnityEngine.UI;
+using static AnimalBehaviour;
 
 public class GameSettings : MonoBehaviour
 {
@@ -18,6 +19,16 @@ public class GameSettings : MonoBehaviour
     public List<AnimalBehaviour.AnimalType> animalsInSeason = new List<AnimalBehaviour.AnimalType>();
     public int score = 0;
 
+    private Dictionary<AnimalType, int> animalScores = new Dictionary<AnimalBehaviour.AnimalType, int>()
+    {
+        {AnimalType.Bird, 10},
+        {AnimalType.Bear, 5},
+        {AnimalType.Goat, 3},
+        {AnimalType.Wolf, 2},
+        {AnimalType.Rabbit, 3},
+        {AnimalType.Deer, 4},
+        {AnimalType.Cattle, 5}
+    };
     private bool hasMessageToShow = false;
     private float messageDurationTimer = -1;
 
@@ -59,20 +70,30 @@ public class GameSettings : MonoBehaviour
 
     public void SubmitHuntedAnimal(AnimalBehaviour.AnimalType type)
     {
-        if (animalsInSeason.Contains(type))
+        // if (animalsInSeason.Contains(type))
+        // {
+        //     score++;
+        // }
+        // else
+        // {
+        //     score--;
+        //     // message.text = "Please Hunt Responsibly";
+        //     // message.color = badMessage;
+        //     // hasMessageToShow = true;
+        //     // messageDurationTimer = messageDuration;
+        // }
+
+        if (animalScores.TryGetValue(type, out int animalScore))
         {
-            score++;
+            score += animalScore;
         }
         else
         {
-            score--;
-            // message.text = "Please Hunt Responsibly";
-            // message.color = badMessage;
-            // hasMessageToShow = true;
-            // messageDurationTimer = messageDuration;
+            score += 2;
+            Debug.Log("Score not specified for animal type!");
         }
 
-        scoreText.text = "Score: " + score*10;
+        scoreText.text = "Score: " + score * 10;
         // Debug.Log("Score changed to " + score);
     }
 }

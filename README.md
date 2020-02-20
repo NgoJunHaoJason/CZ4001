@@ -25,8 +25,6 @@ after cloning:
     - Tree10
     - Tribal Jungle Music Free Pack
     - VRTK
-3. import the package 'Living Birds' from the Asset Store
-4. move the downloaded folder ('living birds') into Library
 
 note - the following VR-related GameObjects are disabled in the hierarchy so that the game can run within Unity editor on computers without VR support:
 

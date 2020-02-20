@@ -8,7 +8,7 @@ public abstract class AnimalBehaviour : MonoBehaviour
     # region Enums
     public enum AnimalCategory { HERBIVORE, CARNIVORE }
 
-    public enum AnimalType { Rabbit, Deer, Cattle, Goat, Ibex, Boar, Wolf, Bear}
+    public enum AnimalType { Rabbit, Deer, Cattle, Goat, Ibex, Boar, Wolf, Bear, Bird}
 
     public enum AnimalAnimation { ATTACK, WALK, RUN, IDLE, DIE, EAT, HOWL }
     # endregion
