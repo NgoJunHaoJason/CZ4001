@@ -54,6 +54,24 @@ public class AnimalHealth : MonoBehaviour
 
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             TakeDamageFrom(player, hitHead? maxHealth : 1); // OHKO if headshot
+
+            GameObject arrowGameObject = collision.gameObject;
+
+            // make arrow stop moving
+            arrowGameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+            Rigidbody arrowRigidbody = arrowGameObject.GetComponentInChildren<Rigidbody>();
+            arrowRigidbody.isKinematic = false; // apply physics to arrow
+            arrowRigidbody.velocity = Vector3.zero; // make arrow stop moving
+
+            // stop emitting trail
+            collision.gameObject.GetComponentInChildren<TrailRenderer>().emitting = false;
+
+            // https://answers.unity.com/questions/871292/fixed-joint-rigidbody-colliding.html
+            // make arrow stick on animal's body
+            FixedJoint fixedJoint = collision.gameObject.AddComponent<FixedJoint>();
+            fixedJoint.enableCollision = false;
+            fixedJoint.connectedBody = this.GetComponent<Rigidbody>();
         }
     }
     #endregion
