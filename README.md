@@ -56,6 +56,7 @@ when building for VR (for CZ4001 computer):
 - [living birds](https://assetstore.unity.com/packages/3d/characters/animals/living-birds-15649)
 - [reticle sprite](https://www.hiclipart.com/free-transparent-background-png-clipart-mryvr)
 - [Resonance Audio](https://resonance-audio.github.io/resonance-audio/develop/unity/getting-started.html)
+  - [v1.2.0 used](https://github.com/resonance-audio/resonance-audio-unity-sdk/releases/tag/v1.2.0) due to [bug in v1.2.1](https://github.com/resonance-audio/resonance-audio-unity-sdk/issues/51#issue-353082964)
 
 ## Miscellaneous
 

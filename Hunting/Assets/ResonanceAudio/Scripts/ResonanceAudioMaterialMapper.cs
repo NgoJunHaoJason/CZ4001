@@ -168,6 +168,7 @@ public class ResonanceAudioMaterialMapper : ScriptableObject {
       var acousticMesh = ResonanceAudioAcousticMesh.GenerateFromMeshFilter(
           gameObject.GetComponent<MeshFilter>(), surfaceMaterialShader);
       if (acousticMesh == null) {
+        Debug.LogError("acousticMesh == null");
         continue;
       }
 
