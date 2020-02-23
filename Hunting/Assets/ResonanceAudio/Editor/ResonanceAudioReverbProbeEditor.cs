@@ -21,18 +21,18 @@ using System.Collections;
 [CustomEditor(typeof(ResonanceAudioReverbProbe))]
 [CanEditMultipleObjects]
 public class ResonanceAudioReverbProbeEditor : Editor {
-  private SerializedProperty regionShape = null;
-  private SerializedProperty boxRegionSize = null;
-  private SerializedProperty sphereRegionRadius = null;
+  private SerializedProperty runtimeApplicationRegionShape = null;
+  private SerializedProperty boxApplicationRegionSize = null;
+  private SerializedProperty sphereApplicationRegionRadius = null;
   private SerializedProperty onlyApplyWhenVisible = null;
   private SerializedProperty reverbGainDb = null;
   private SerializedProperty reverbBrightness = null;
   private SerializedProperty reverbTime = null;
   private SerializedProperty rt60s = null;
 
-  private GUIContent regionShapeLabel = new GUIContent("Shape");
-  private GUIContent boxRegionSizeLabel = new GUIContent("Size");
-  private GUIContent sphereRegionRadiusLabel = new GUIContent("Radius");
+  private GUIContent applicationRegionShapeLabel = new GUIContent("Shape");
+  private GUIContent boxApplicationRegionSizeLabel = new GUIContent("Size");
+  private GUIContent sphereApplicationRegionRadiusLabel = new GUIContent("Radius");
   private GUIContent onlyApplyWhenVisibleLabel = new GUIContent("Only When Visible");
   private GUIContent reverbPropertiesLabel = new GUIContent("Reverb Properties",
       "Parameters to adjust the reverb properties of the room.");
@@ -50,9 +50,9 @@ public class ResonanceAudioReverbProbeEditor : Editor {
   private const int rt60ValueFieldMinWidth = 20;
 
   void OnEnable () {
-    regionShape = serializedObject.FindProperty("regionShape");
-    boxRegionSize = serializedObject.FindProperty("boxRegionSize");
-    sphereRegionRadius = serializedObject.FindProperty("sphereRegionRadius");
+    runtimeApplicationRegionShape = serializedObject.FindProperty("runtimeApplicationRegionShape");
+    boxApplicationRegionSize = serializedObject.FindProperty("boxApplicationRegionSize");
+    sphereApplicationRegionRadius = serializedObject.FindProperty("sphereApplicationRegionRadius");
     onlyApplyWhenVisible = serializedObject.FindProperty("onlyApplyWhenVisible");
     reverbGainDb = serializedObject.FindProperty("reverbGainDb");
     reverbBrightness = serializedObject.FindProperty("reverbBrightness");
@@ -80,13 +80,15 @@ public class ResonanceAudioReverbProbeEditor : Editor {
 
   // Show the parameters of the region of application.
   private void DrawApplicationRegion() {
-    EditorGUILayout.PropertyField(regionShape, regionShapeLabel);
-    switch ((ResonanceAudioReverbProbe.RegionShape) regionShape.enumValueIndex) {
-      case ResonanceAudioReverbProbe.RegionShape.Sphere:
-        EditorGUILayout.PropertyField(sphereRegionRadius, sphereRegionRadiusLabel);
+    EditorGUILayout.PropertyField(runtimeApplicationRegionShape, applicationRegionShapeLabel);
+    switch ((ResonanceAudioReverbProbe.ApplicationRegionShape)
+            runtimeApplicationRegionShape.enumValueIndex) {
+      case ResonanceAudioReverbProbe.ApplicationRegionShape.Sphere:
+        EditorGUILayout.PropertyField(sphereApplicationRegionRadius,
+                                      sphereApplicationRegionRadiusLabel);
         break;
-      case ResonanceAudioReverbProbe.RegionShape.Box:
-        EditorGUILayout.PropertyField(boxRegionSize, boxRegionSizeLabel);
+      case ResonanceAudioReverbProbe.ApplicationRegionShape.Box:
+        EditorGUILayout.PropertyField(boxApplicationRegionSize, boxApplicationRegionSizeLabel);
         break;
     }
     EditorGUILayout.PropertyField(onlyApplyWhenVisible, onlyApplyWhenVisibleLabel);
