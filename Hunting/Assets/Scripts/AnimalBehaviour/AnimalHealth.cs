@@ -52,13 +52,6 @@ public class AnimalHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Arrow"))
         {
-            // get the specific collider of the animal that the arrow hit
-            Collider collider = collision.GetContact(0).thisCollider;
-            bool hitHead = collider.gameObject.CompareTag("Head");
-
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            TakeDamageFrom(player, hitHead? maxHealth : 1); // OHKO if headshot
-
             GameObject arrowGameObject = collision.gameObject;
 
             // make arrow stop moving
@@ -70,6 +63,13 @@ public class AnimalHealth : MonoBehaviour
 
             // stop emitting trail
             collision.gameObject.GetComponentInChildren<TrailRenderer>().emitting = false;
+
+            // get the specific collider of the animal that the arrow hit
+            Collider collider = collision.GetContact(0).thisCollider;
+            bool hitHead = collider.gameObject.CompareTag("Head");
+
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            TakeDamageFrom(player, hitHead? maxHealth : 1); // OHKO if headshot
 
             // https://answers.unity.com/questions/871292/fixed-joint-rigidbody-colliding.html
             // make arrow stick on animal's body
