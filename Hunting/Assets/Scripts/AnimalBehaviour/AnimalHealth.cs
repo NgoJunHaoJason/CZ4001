@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 
 [RequireComponent(typeof(Rigidbody))]
@@ -29,6 +30,8 @@ public class AnimalHealth : MonoBehaviour
     public bool ShouldFlee { get => currentHealth < fightFleeThreshold; }
 
     public bool IsDead { get => currentHealth <= 0; }
+
+    public List<GameObject> AttachedArrows { get; private set; }
     # endregion
 
     #region Fields
@@ -42,6 +45,7 @@ public class AnimalHealth : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        AttachedArrows = new List<GameObject>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -72,6 +76,8 @@ public class AnimalHealth : MonoBehaviour
             FixedJoint fixedJoint = collision.gameObject.AddComponent<FixedJoint>();
             fixedJoint.enableCollision = false;
             fixedJoint.connectedBody = this.GetComponent<Rigidbody>();
+
+            AttachedArrows.Add(arrowGameObject);
         }
     }
     #endregion

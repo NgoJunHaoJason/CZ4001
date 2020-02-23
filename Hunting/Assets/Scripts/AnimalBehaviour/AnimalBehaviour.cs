@@ -221,6 +221,9 @@ public abstract class AnimalBehaviour : MonoBehaviour
     {
         if (deathTimer == 0) // animal just died
         {
+            foreach (GameObject arrowGameObject in health.AttachedArrows)
+                Destroy(arrowGameObject);
+
             ChangeAnimation(AnimalAnimation.DIE); 
 
             if (health.LastAttackedBy.CompareTag("Player"))
