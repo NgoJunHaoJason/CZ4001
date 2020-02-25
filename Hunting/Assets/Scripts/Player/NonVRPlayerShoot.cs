@@ -5,7 +5,7 @@ using VRTK.Examples.Archery;
 // reference: scripts within
 // Assets/Library/VRTK/LegacyExampleFiles/ExampleResources/Scripts/Archery
 [RequireComponent(typeof(Collider))]
-public class TempPlayerShoot : MonoBehaviour
+public class NonVRPlayerShoot : MonoBehaviour
 {
     # region Serialize Fields
     [SerializeField]
