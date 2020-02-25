@@ -36,12 +36,16 @@ public class AnimalHealth : MonoBehaviour
     private bool recentlyDamaged = false;
 
     private int currentHealth = 3;
+    
+    private GameSettings game;
     # endregion
 
     #region MonoBehaviour Methods
     private void Start()
     {
         currentHealth = maxHealth;
+        game = GameObject.FindGameObjectWithTag("GameController").
+            GetComponent<GameSettings>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -51,7 +55,8 @@ public class AnimalHealth : MonoBehaviour
             // get the specific collider of the animal that the arrow hit
             Collider collider = collision.GetContact(0).thisCollider;
             bool hitHead = collider.gameObject.CompareTag("Head");
-
+            if (hitHead)
+                game.addHeadshotBonus();
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             TakeDamageFrom(player, hitHead? maxHealth : 1); // OHKO if headshot
         }
