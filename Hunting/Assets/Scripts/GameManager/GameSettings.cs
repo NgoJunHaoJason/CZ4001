@@ -12,22 +12,25 @@ public class GameSettings : MonoBehaviour
     public Text scoreText;
     public bool showArrowTrail;
     public float messageDuration;
+    public int headshotBonus = 1;
 
     public Color badMessage;
     public Color goodMessage;
 
     public List<AnimalBehaviour.AnimalType> animalsInSeason = new List<AnimalBehaviour.AnimalType>();
-    public int score = 0;
+    private int score = 0;
 
     private Dictionary<AnimalType, int> animalScores = new Dictionary<AnimalBehaviour.AnimalType, int>()
     {
-        {AnimalType.Bird, 10},
-        {AnimalType.Bear, 5},
-        {AnimalType.Goat, 3},
-        {AnimalType.Wolf, 2},
         {AnimalType.Rabbit, 3},
         {AnimalType.Deer, 4},
-        {AnimalType.Cattle, 5}
+        {AnimalType.Cattle, 5},
+        {AnimalType.Goat, 3},
+        {AnimalType.Ibex, 4},
+        {AnimalType.Boar, 3},
+        {AnimalType.Wolf, 2},
+        {AnimalType.Bear, 5},
+        {AnimalType.Bird, 10},
     };
     private bool hasMessageToShow = false;
     private float messageDurationTimer = -1;
@@ -95,5 +98,11 @@ public class GameSettings : MonoBehaviour
 
         scoreText.text = "Score: " + score * 10;
         // Debug.Log("Score changed to " + score);
+    }
+
+    public void addHeadshotBonus()
+    {
+        score += headshotBonus;
+        scoreText.text = "Score: " + score * 10;
     }
 }
