@@ -9,7 +9,7 @@ public class NonVRPlayerShoot : MonoBehaviour
 {
     # region Serialize Fields
     [SerializeField]
-    private GameObject tempArrowPrefab = null;
+    private GameObject nonVRArrowPrefab = null;
 
     [SerializeField]
     private float thrust = 25f;
@@ -37,7 +37,7 @@ public class NonVRPlayerShoot : MonoBehaviour
 
         if (Debug.isDebugBuild)
         {
-            if (tempArrowPrefab == null)
+            if (nonVRArrowPrefab == null)
                 Debug.LogError("Temp Arrow Prefab is not assigned in Temp Player Shoot.");
             if (playerCamera == null)
                 Debug.LogError("Player Game Object's Camera is missing");
@@ -72,7 +72,7 @@ public class NonVRPlayerShoot : MonoBehaviour
 
         // create arrow within temporary player game object
         GameObject arrowGameObject = Instantiate(
-            tempArrowPrefab,
+            nonVRArrowPrefab,
             startingPosition,
             startingRotation
         );

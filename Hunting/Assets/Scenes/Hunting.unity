@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 142347225}
   - component: {fileID: 142347226}
   m_Layer: 0
-  m_Name: TempGameManager
+  m_Name: NonVRGameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2138,10 +2138,10 @@ GameObject:
   - component: {fileID: 810421209}
   - component: {fileID: 810421210}
   - component: {fileID: 810421201}
-  - component: {fileID: 810421207}
   - component: {fileID: 810421211}
+  - component: {fileID: 810421207}
   m_Layer: 0
-  m_Name: TempPlayer
+  m_Name: NonVRPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2406,7 +2406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29a3e8897600a3888a8f2b2b295e7603, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tempArrowPrefab: {fileID: 1425709975329154792, guid: 2d1a8e813c1301c82a28806e203c8754,
+  nonVRArrowPrefab: {fileID: 1425709975329154792, guid: 2d1a8e813c1301c82a28806e203c8754,
     type: 3}
   thrust: 25
   shootDelay: 0.5
@@ -2651,7 +2651,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1018956798}
   m_Layer: 0
-  m_Name: Temp
+  m_Name: NonVR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
