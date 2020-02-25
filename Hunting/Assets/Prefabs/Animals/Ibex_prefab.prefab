@@ -1062,6 +1062,7 @@ MonoBehaviour:
   sight: {fileID: 2774512153939878415}
   reach: {fileID: 2774512153432943104}
   attackInterval: 2
+  attackPower: 1
 --- !u!82 &2774512153406232538
 AudioSource:
   m_ObjectHideFlags: 0

@@ -26,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
     # region Serialize Fields
 
     [SerializeField]
-    private int startingHealth = 100;
+    private int startingHealth = 10;
 
     [SerializeField]
     private Text healthValueText = null;

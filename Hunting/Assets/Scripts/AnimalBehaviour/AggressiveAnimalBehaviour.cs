@@ -13,7 +13,7 @@ public abstract class AggressiveAnimalBehaviour : AnimalBehaviour
     private float attackInterval = 2;
 
     [SerializeField]
-    private int attackPower = 10;
+    private int attackPower = 1;
     # endregion
 
     # region Fields
@@ -41,13 +41,13 @@ public abstract class AggressiveAnimalBehaviour : AnimalBehaviour
 
                     if (Debug.isDebugBuild)
                         Debug.Log(this.gameObject.name + " dealt <color=Red>" + 
-                            attackPower.ToString() + "</color> to the Player.");
+                            attackPower.ToString() + "</color> damage to the Player.");
                 }
             }
             else if (reach is CarnivoreReach)
             {
                 AnimalHealth animalHealth = ((CarnivoreReach)reach).HerbivoreInRange.GetComponentInChildren<AnimalHealth>();
-                animalHealth.TakeDamageFrom(gameObject, 2);
+                animalHealth.TakeDamageFrom(this.gameObject, attackPower);
             }
 
             attackTimer = 0;

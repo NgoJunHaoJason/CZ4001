@@ -74,7 +74,7 @@ public class AnimalHealth : MonoBehaviour
             if (hitHead)
                 game.addHeadshotBonus();
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            TakeDamageFrom(player, hitHead? maxHealth : 1); // OHKO if headshot
+            TakeDamageFrom(player, hitHead ? maxHealth : 1); // OHKO if headshot
 
             // https://answers.unity.com/questions/871292/fixed-joint-rigidbody-colliding.html
             // make arrow stick on animal's body
@@ -97,7 +97,8 @@ public class AnimalHealth : MonoBehaviour
         AttackedByPlayer = attacker.CompareTag("Player");
 
         if (Debug.isDebugBuild)
-            Debug.Log("Animal took damage; current health: " + currentHealth.ToString());
+            Debug.Log(this.gameObject.name + " took " + damage.ToString() + 
+            " damage from " + attacker.name + "; current health: " + currentHealth.ToString());
 
         if (IsDead)
         {

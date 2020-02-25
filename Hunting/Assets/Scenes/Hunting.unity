@@ -2229,7 +2229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a29470de009cce48a1bef0bbd33b4ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingHealth: 100
+  startingHealth: 10
   healthValueText: {fileID: 1392113817}
   healthSlider: {fileID: 1876340628}
   deathAudioClip: {fileID: 8300000, guid: 5afca42ac0b79634ead8c777e0adcc0c, type: 3}
@@ -3261,7 +3261,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100
+  m_Text: "10\x13"
 --- !u!222 &1392113818
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3856,10 +3856,10 @@ MonoBehaviour:
   scoreText: {fileID: 1082686366}
   showArrowTrail: 0
   messageDuration: 3
+  headshotBonus: 1
   badMessage: {r: 0.6037736, g: 0, b: 0, a: 0.78431374}
   goodMessage: {r: 0, g: 0.069712676, b: 0.6415094, a: 0.78431374}
   animalsInSeason: 00000000010000000300000005000000
-  score: 0
 --- !u!1 &1786123576
 GameObject:
   m_ObjectHideFlags: 0
@@ -4187,9 +4187,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
+  m_MaxValue: 10
   m_WholeNumbers: 1
-  m_Value: 100
+  m_Value: 10
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
