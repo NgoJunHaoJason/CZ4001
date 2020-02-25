@@ -561,6 +561,9 @@ MonoBehaviour:
   idleActionInterval: 5
   health: {fileID: 7514884818606880201}
   sight: {fileID: 7514884818584587227}
+  childrenTransforms:
+  - {fileID: 7514884818606880206}
+  - {fileID: 7514884818684331976}
   reach: {fileID: 5307287691230096837}
   attackInterval: 2
   attackPower: 2

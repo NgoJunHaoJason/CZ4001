@@ -53,6 +53,10 @@ public abstract class AnimalBehaviour : MonoBehaviour
     
     [SerializeField]
     protected AnimalSight sight;
+
+    // quick hack to make sure that children game objects follow parent gameobject
+    [SerializeField]
+    private Transform[] childrenTransforms;
     # endregion
 
     # region Fields
@@ -109,11 +113,21 @@ public abstract class AnimalBehaviour : MonoBehaviour
 
         Transform ray = transform;
 
-        Debug.DrawRay(transform.position + new Vector3(0, 1, 0), transform.forward * obstacleDetectionRange, Color.red);
+        Debug.DrawRay(
+            transform.position + new Vector3(0, 1, 0), 
+            transform.forward * obstacleDetectionRange, 
+            Color.red
+        );
 
-        if (Physics.Raycast(ray.position + new Vector3(0, 0.5f, 0), direction, out RaycastHit hit, obstacleDetectionRange))
+        if (
+            Physics.Raycast(ray.position + new Vector3(0, 0.5f, 0), 
+            direction, 
+            out RaycastHit hit, 
+            obstacleDetectionRange)
+        )
         {
-            if (hit.collider.gameObject.CompareTag("Terrain") || hit.collider.gameObject.CompareTag("Tree"))
+            if (hit.collider.gameObject.CompareTag("Terrain") || 
+            hit.collider.gameObject.CompareTag("Tree"))
             {
                 return true;
             }
@@ -124,22 +138,6 @@ public abstract class AnimalBehaviour : MonoBehaviour
 
     private void Move(float speed)
     {
-        /*
-        Vector3 direction = destination - transform.position;
-        direction.y = 0;
-
-        if (direction.magnitude < 0.5)
-        {
-            destinationReached = true;
-            Idle();
-        }
-        else
-        {
-            characterController.Move(direction.normalized * speed);
-            movementTimer += Time.deltaTime;
-        }
-        */
-
         Vector3 direction = destination - transform.position;
         direction.y = 0;
 
@@ -148,7 +146,6 @@ public abstract class AnimalBehaviour : MonoBehaviour
             ChangeDestination(null, 1f);
         }
 
-
         if (direction.magnitude < 0.5)
         {
             destinationReached = true;
@@ -156,8 +153,16 @@ public abstract class AnimalBehaviour : MonoBehaviour
         }
         else 
         {
+            // this.transform.LookAt(destination);
             characterController.SimpleMove(direction.normalized * speed);
             movementTimer -= Time.deltaTime;
+        }
+
+        // quick hack to make sure that children game objects follow parent gameobject
+        foreach (Transform childTransform in childrenTransforms)
+        {
+            childTransform.localPosition = Vector3.zero;
+            childTransform.localRotation = Quaternion.identity;
         }
     }
     # endregion
@@ -173,9 +178,17 @@ public abstract class AnimalBehaviour : MonoBehaviour
             {
                 int sign = Random.Range(0, 1f) > 0.5 ? 1 : -1;
                 int movableDistance = (int)(minMovableDistance * distanceMult);
-                float movableX = Mathf.Clamp(transform.position.x +  sign * Random.Range(minMovableDistance, movableDistance), terrainMinPosition.x, terrainMaxPosition.x);
+                float movableX = Mathf.Clamp(
+                    transform.position.x +  sign * Random.Range(minMovableDistance, movableDistance), 
+                    terrainMinPosition.x, terrainMaxPosition.x
+                );
+                
                 sign = Random.Range(0, 1f) > 0.5 ? 1 : -1;
-                float movableZ = Mathf.Clamp(transform.position.z + sign * Random.Range(minMovableDistance, movableDistance), terrainMinPosition.z, terrainMaxPosition.z);
+                float movableZ = Mathf.Clamp(
+                    transform.position.z + sign * Random.Range(minMovableDistance, movableDistance), 
+                    terrainMinPosition.z, terrainMaxPosition.z
+                );
+                
                 destination = new Vector3(movableX, 0, movableZ);
 
             } while (CollisionDetected(destination - transform.position));
@@ -185,12 +198,23 @@ public abstract class AnimalBehaviour : MonoBehaviour
     }
 
     protected void Turn()
-    {
+    {      
         Vector3 direction = destination - transform.position;
         direction.y = 0;
 
         Quaternion rotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, turnSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation, 
+            rotation, 
+            turnSpeed * Time.deltaTime
+        );
+
+        // quick hack to make sure that children game objects follow parent gameobject
+        foreach (Transform childTransform in childrenTransforms)
+        {
+            childTransform.localPosition = Vector3.zero;
+            childTransform.localRotation = Quaternion.identity;
+        }
     }
 
     protected void Flee()

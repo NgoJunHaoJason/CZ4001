@@ -283,6 +283,10 @@ MonoBehaviour:
   idleActionInterval: 5
   health: {fileID: 9105749535371559144}
   sight: {fileID: 9105749535528221764}
+  childrenTransforms:
+  - {fileID: 9105749535540381858}
+  - {fileID: 9105749535088708171}
+  - {fileID: 9105749535371559145}
 --- !u!82 &9105749534697031681
 AudioSource:
   m_ObjectHideFlags: 0
