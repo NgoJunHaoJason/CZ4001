@@ -99,7 +99,7 @@ NavMeshSettings:
     agentTypeID: 0
     agentRadius: 0.2
     agentHeight: 1
-    agentSlope: 40
+    agentSlope: 35
     agentClimb: 0.2
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
@@ -111,13 +111,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
---- !u!20 &13669334 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 2514796166417035982, guid: 712bf6966e0fd5988be9496aa40a76e1,
-    type: 3}
-  m_PrefabInstance: {fileID: 2514796166405529880}
-  m_PrefabAsset: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 18a26ba9c14e74fad983dfcee6e895a1, type: 2}
 --- !u!1001 &14972703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -701,7 +695,7 @@ PrefabInstance:
     - target: {fileID: 11400000, guid: 1ca5316dd08051f42b31052d31beefed, type: 3}
       propertyPath: currentCamera
       value: 
-      objectReference: {fileID: 13669334}
+      objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 1ca5316dd08051f42b31052d31beefed, type: 3}
       propertyPath: highQuality
       value: 1
@@ -1118,7 +1112,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 0.5
   m_Radius: 0.2
-  m_SlopeLimit: 45
+  m_SlopeLimit: 35
   m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -4009,7 +4003,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 13669334}
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1

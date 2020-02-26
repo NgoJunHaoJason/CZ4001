@@ -159,6 +159,7 @@ public class DeterministicAnimalSpawner : MonoBehaviour
 
     private void Spawn(GameObject animal)
     {
+        Debug.Log("spawning " + animal.name + " at " + SpawnPoint.position.ToString());
         Instantiate(animal, SpawnPoint.position, Quaternion.Euler(0,0,0));
     }
   

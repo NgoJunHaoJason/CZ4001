@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(CharacterController))]
 public abstract class AnimalBehaviour : MonoBehaviour
 {
+    public NavMeshAgent agent;
     # region Enums
     public enum AnimalCategory { HERBIVORE, CARNIVORE }
 
@@ -96,6 +98,7 @@ public abstract class AnimalBehaviour : MonoBehaviour
             FindGameObjectWithTag("Terrain").GetComponent<TerrainManager>();
         terrainMinPosition = terrainManager.terrainMinPosition;
         terrainMaxPosition = terrainManager.terrainMaxPosition;
+        agent = this.GetComponent<NavMeshAgent>();
 
         gameLoader = GameObject.FindGameObjectWithTag("GameController").
             GetComponent<GameSettings>();
@@ -153,8 +156,9 @@ public abstract class AnimalBehaviour : MonoBehaviour
         }
         else 
         {
-            // this.transform.LookAt(destination);
-            characterController.SimpleMove(direction.normalized * speed);
+            agent.speed = speed;
+            agent.SetDestination(destination);
+            //characterController.SimpleMove(direction.normalized * speed);
             movementTimer -= Time.deltaTime;
         }
 

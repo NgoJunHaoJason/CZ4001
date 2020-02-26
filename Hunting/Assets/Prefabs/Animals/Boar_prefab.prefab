@@ -719,6 +719,7 @@ GameObject:
   - component: {fileID: 419677104016227631}
   - component: {fileID: 5416081543160862981}
   - component: {fileID: 2155760795617972036}
+  - component: {fileID: 4021458110761441919}
   m_Layer: 0
   m_Name: Boar_prefab
   m_TagString: Boar
@@ -775,6 +776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4ba187cbc696d44be6cb7074be3591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   animalCategory: 0
   animalType: 5
   walkSpeed: 1
@@ -912,7 +914,7 @@ CharacterController:
   m_GameObject: {fileID: 419677103769976500}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.6
@@ -921,6 +923,28 @@ CharacterController:
   m_SkinWidth: 0.1
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.05, z: 0}
+--- !u!195 &4021458110761441919
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419677103769976500}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &419677103871916762
 GameObject:
   m_ObjectHideFlags: 0

@@ -382,6 +382,7 @@ GameObject:
   - component: {fileID: 2747755717121782522}
   - component: {fileID: 2747755717121782520}
   - component: {fileID: 2747755716455832400}
+  - component: {fileID: 4268152745151251631}
   m_Layer: 0
   m_Name: Goose_prefab
   m_TagString: Goose
@@ -438,7 +439,7 @@ CharacterController:
   m_GameObject: {fileID: 2747755717121782524}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 1
   m_Radius: 0.3
@@ -459,20 +460,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d3954df063c5144b7e23bb302fc1f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charController: {fileID: 2747755717121782522}
-  animator: {fileID: 2747755717121782525}
-  sight: {fileID: 2747755717993120885}
-  attack: {fileID: 0}
-  audioSource: {fileID: 2747755716455832400}
+  agent: {fileID: 0}
   animalCategory: 0
   animalType: 0
-  minMovableDistance: 3
   walkSpeed: 0.5
   runSpeed: 2
   turnSpeed: 3
-  actionInterval: 5
-  attackedByPlayer: {fileID: 0}
+  deathDuration: 30
+  dyingSpeed: 1e-10
+  minMovableDistance: 3
   obstacleDetectionRange: 5
+  idleActionInterval: 0
+  health: {fileID: 0}
+  sight: {fileID: 2747755717993120885}
 --- !u!82 &2747755716455832400
 AudioSource:
   m_ObjectHideFlags: 0
@@ -569,6 +569,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!195 &4268152745151251631
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2747755717121782524}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2747755717168647402
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,11 +915,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d433117993024418d61cd1c2d347c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animalBehaviour: {fileID: 2747755717121782520}
   maxHealth: 1
-  healthThreshold: 1
+  fightFleeThreshold: 0
   damageDelay: 0.5
-  currentHealth: 0
 --- !u!1 &2747755717694175623
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,9 +1129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41e7f00ba0a6e14f82910d2d5b1bb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: {fileID: 0}
-  herbivoresInRange: []
-  carnivoresInRange: []
 --- !u!1 &2747755718004156458
 GameObject:
   m_ObjectHideFlags: 0
