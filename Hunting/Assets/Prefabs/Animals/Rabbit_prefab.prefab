@@ -395,10 +395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41e7f00ba0a6e14f82910d2d5b1bb1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerInRange: {fileID: 0}
-  herbivoresInRange: []
-  carnivoresInRange: []
-  deadAnimalInRange: {fileID: 0}
 --- !u!1 &496196624
 GameObject:
   m_ObjectHideFlags: 0
@@ -571,7 +567,7 @@ GameObject:
   - component: {fileID: 5705755160661427746}
   - component: {fileID: 319414107}
   m_Layer: 0
-  m_Name: Wild_Rabbit
+  m_Name: Rabbit_prefab
   m_TagString: Rabbit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -625,21 +621,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d3954df063c5144b7e23bb302fc1f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charController: {fileID: 5705755160661427746}
-  animator: {fileID: 772342640}
-  health: {fileID: 772342648}
-  sight: {fileID: 458082837}
-  reach: {fileID: 0}
-  audioSource: {fileID: 772342644}
   animalCategory: 0
   animalType: 0
-  minMovableDistance: 10
   walkSpeed: 0.8
   runSpeed: 2
   turnSpeed: 3
+  deathDuration: 30
+  dyingSpeed: 1e-10
+  minMovableDistance: 10
   obstacleDetectionRange: 5
   idleActionInterval: 5
-  attackInterval: 2
+  health: {fileID: 772342648}
+  sight: {fileID: 458082837}
 --- !u!82 &772342644
 AudioSource:
   m_ObjectHideFlags: 0
@@ -649,15 +642,16 @@ AudioSource:
   m_GameObject: {fileID: 772342639}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 248799cb4acba48f7b3ee842a80f788c,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: f124768ce4289934b81744114369ccda, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
+  Spatialize: 1
+  SpatializePostEffects: 1
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -876,8 +870,6 @@ MonoBehaviour:
   maxHealth: 1
   fightFleeThreshold: 0
   damageDelay: 0.5
-  attackedByPlayer: 0
-  lastAttackedBy: {fileID: 0}
 --- !u!1 &836564291
 GameObject:
   m_ObjectHideFlags: 0
