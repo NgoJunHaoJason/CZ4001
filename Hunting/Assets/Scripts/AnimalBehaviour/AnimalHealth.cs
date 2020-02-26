@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 
 [RequireComponent(typeof(Rigidbody))]
@@ -29,6 +30,8 @@ public class AnimalHealth : MonoBehaviour
     public bool ShouldFlee { get => currentHealth < fightFleeThreshold; }
 
     public bool IsDead { get => currentHealth <= 0; }
+
+    public List<GameObject> AttachedArrows { get; private set; }
     # endregion
 
     #region Fields
@@ -44,6 +47,7 @@ public class AnimalHealth : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        AttachedArrows = new List<GameObject>();
         game = GameObject.FindGameObjectWithTag("GameController").
             GetComponent<GameSettings>();
     }
@@ -52,13 +56,33 @@ public class AnimalHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Arrow"))
         {
+            GameObject arrowGameObject = collision.gameObject;
+
+            // make arrow stop moving
+            arrowGameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+            Rigidbody arrowRigidbody = arrowGameObject.GetComponentInChildren<Rigidbody>();
+            arrowRigidbody.isKinematic = false; // apply physics to arrow
+            arrowRigidbody.velocity = Vector3.zero; // make arrow stop moving
+
+            // stop emitting trail
+            collision.gameObject.GetComponentInChildren<TrailRenderer>().emitting = false;
+
             // get the specific collider of the animal that the arrow hit
             Collider collider = collision.GetContact(0).thisCollider;
             bool hitHead = collider.gameObject.CompareTag("Head");
             if (hitHead)
                 game.addHeadshotBonus();
             GameObject player = GameObject.FindGameObjectWithTag("Player");
-            TakeDamageFrom(player, hitHead? maxHealth : 1); // OHKO if headshot
+            TakeDamageFrom(player, hitHead ? maxHealth : 1); // OHKO if headshot
+
+            // https://answers.unity.com/questions/871292/fixed-joint-rigidbody-colliding.html
+            // make arrow stick on animal's body
+            FixedJoint fixedJoint = collision.gameObject.AddComponent<FixedJoint>();
+            fixedJoint.enableCollision = false;
+            fixedJoint.connectedBody = this.GetComponent<Rigidbody>();
+
+            AttachedArrows.Add(arrowGameObject);
         }
     }
     #endregion
@@ -73,7 +97,8 @@ public class AnimalHealth : MonoBehaviour
         AttackedByPlayer = attacker.CompareTag("Player");
 
         if (Debug.isDebugBuild)
-            Debug.Log("Animal took damage; current health: " + currentHealth.ToString());
+            Debug.Log(this.gameObject.name + " took " + damage.ToString() + 
+            " damage from " + attacker.name + "; current health: " + currentHealth.ToString());
 
         if (IsDead)
         {

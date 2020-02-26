@@ -5,11 +5,11 @@ using VRTK.Examples.Archery;
 // reference: scripts within
 // Assets/Library/VRTK/LegacyExampleFiles/ExampleResources/Scripts/Archery
 [RequireComponent(typeof(Collider))]
-public class TempPlayerShoot : MonoBehaviour
+public class NonVRPlayerShoot : MonoBehaviour
 {
     # region Serialize Fields
     [SerializeField]
-    private GameObject tempArrowPrefab = null;
+    private GameObject nonVRArrowPrefab = null;
 
     [SerializeField]
     private float thrust = 25f;
@@ -37,7 +37,7 @@ public class TempPlayerShoot : MonoBehaviour
 
         if (Debug.isDebugBuild)
         {
-            if (tempArrowPrefab == null)
+            if (nonVRArrowPrefab == null)
                 Debug.LogError("Temp Arrow Prefab is not assigned in Temp Player Shoot.");
             if (playerCamera == null)
                 Debug.LogError("Player Game Object's Camera is missing");
@@ -64,7 +64,7 @@ public class TempPlayerShoot : MonoBehaviour
 
         // probability not the most straight-forward way to do this, but this works
         Quaternion startingRotation = new Quaternion(
-            transform.rotation.x + playerCamera.transform.rotation.x, 
+            transform.rotation.x + playerCamera.transform.rotation.x,
             transform.rotation.y + playerCamera.transform.rotation.y,
             transform.rotation.z + playerCamera.transform.rotation.z,
             transform.rotation.w + playerCamera.transform.rotation.w
@@ -72,41 +72,44 @@ public class TempPlayerShoot : MonoBehaviour
 
         // create arrow within temporary player game object
         GameObject arrowGameObject = Instantiate(
-            tempArrowPrefab, 
-            startingPosition, 
+            nonVRArrowPrefab,
+            startingPosition,
             startingRotation
         );
 
         // arrow should not hit player on its way out
-        Physics.IgnoreCollision(playerCollider, arrowGameObject.GetComponent<Collider>());
-
-        if (arrowGameObject == null)
+        Collider arrowCollider = arrowGameObject.GetComponent<Collider>();
+        if (arrowCollider == null)
         {
             if (Debug.isDebugBuild)
-                Debug.LogError(
-                    "Temp Arrow Prefab is missing RigidBody component", 
-                    arrowGameObject
-                );
+                Debug.LogError("Temp Arrow Prefab is missing Collider component");
         }
         else
         {
-            TrailRenderer trailRenderer = arrowGameObject.GetComponentInChildren<TrailRenderer>();
+            Physics.IgnoreCollision(playerCollider, arrowCollider);
+        }
 
-            if (trailRenderer != null && showArrowTrail)
-                trailRenderer.emitting = true;
+        // show arrow trail
+        TrailRenderer trailRenderer = arrowGameObject.GetComponentInChildren<TrailRenderer>();
 
-            Rigidbody arrowRigidbody = arrowGameObject.GetComponent<Rigidbody>();
+        if (trailRenderer != null && showArrowTrail)
+            trailRenderer.emitting = true;
 
+        // make arrow fly forward
+        Rigidbody arrowRigidbody = arrowGameObject.GetComponent<Rigidbody>();
+
+        if (arrowRigidbody == null)
+        {
+            if (Debug.isDebugBuild)
+                Debug.LogError("Temp Arrow Prefab is missing RigidBody component");
+        }
+        else
+        {
             arrowRigidbody.isKinematic = false;
-            
+
             arrowRigidbody.velocity = arrowGameObject.transform.
                 TransformDirection(Vector3.forward) * thrust;
         }
-
-        // Arrow arrow = arrowGameObject.GetComponentInChildren<Arrow>();
-
-        // if (arrow != null)
-        //     arrow.inFlight = true;
     }
     # endregion
 }
