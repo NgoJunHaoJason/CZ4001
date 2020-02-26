@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 9105749534697031681}
   - component: {fileID: 804603207261407345}
   - component: {fileID: 5590174035617149682}
+  - component: {fileID: 4584154452694743194}
   m_Layer: 0
   m_Name: Deer_male_prefab
   m_TagString: Deer
@@ -271,6 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d3954df063c5144b7e23bb302fc1f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   animalCategory: 0
   animalType: 1
   walkSpeed: 1.2
@@ -402,7 +404,7 @@ CharacterController:
   m_GameObject: {fileID: 9105749534568517694}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.7
@@ -411,6 +413,28 @@ CharacterController:
   m_SkinWidth: 0.1
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.05, z: 0.2}
+--- !u!195 &4584154452694743194
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9105749534568517694}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &9105749534636480224
 GameObject:
   m_ObjectHideFlags: 0
