@@ -553,6 +553,7 @@ GameObject:
   - component: {fileID: 8675116725116552853}
   - component: {fileID: 6932881845231203475}
   - component: {fileID: 7181303287813894924}
+  - component: {fileID: 2817520270922870364}
   m_Layer: 0
   m_Name: Cattle_prefab
   m_TagString: Cattle
@@ -609,6 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac4ba187cbc696d44be6cb7074be3591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
   animalCategory: 0
   animalType: 2
   walkSpeed: 1
@@ -742,7 +744,7 @@ CharacterController:
   m_GameObject: {fileID: 8675116723931693150}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 2
   m_Radius: 1
@@ -751,6 +753,28 @@ CharacterController:
   m_SkinWidth: 0.1
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.1, z: 0}
+--- !u!195 &2817520270922870364
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8675116723931693150}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &8675116723942237287
 GameObject:
   m_ObjectHideFlags: 0
