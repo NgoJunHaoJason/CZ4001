@@ -1,96 +1,108 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(CharacterController))]
 public abstract class AnimalBehaviour : MonoBehaviour
 {
-    public CharacterController charController;
-    public Animator animator;
-
-    public AnimalHealth health;
-    public AnimalSight sight;
-    public AnimalReach reach;
-
-    public AudioSource audioSource;
-
+    # region Enums
     public enum AnimalCategory { HERBIVORE, CARNIVORE }
-    public AnimalCategory animalCategory;
 
-    public enum AnimalType { Rabbit, Deer, Cattle, Goat, Ibex, Boar, Wolf, Bear}
-    public AnimalType animalType;
-
-    public int minMovableDistance;
-    public float walkSpeed;
-    public float runSpeed;
-    public float turnSpeed;
-
-    public float obstacleDetectionRange;
-    public int idleActionInterval;
+    public enum AnimalType { Rabbit, Deer, Cattle, Goat, Ibex, Boar, Wolf, Bear, Bird}
 
     public enum AnimalAnimation { ATTACK, WALK, RUN, IDLE, DIE, EAT, HOWL }
+    # endregion
+
+    # region Properties
+    public AnimalCategory Category { get => animalCategory; }
+    # endregion
+
+    # region Serialize Fields
+    [SerializeField]
+    private AnimalCategory animalCategory;
+
+    [SerializeField]
+    private AnimalType animalType;
+
+    [SerializeField]
+    private float walkSpeed = 1;
+
+    [SerializeField]
+    private float runSpeed = 2;
+
+    [SerializeField]
+    private float turnSpeed = 3;
+
+    [SerializeField]
+    private float deathDuration = 30;
+
+    [SerializeField]
+    private float dyingSpeed = 1e-10f;
+
+    [SerializeField]
+    private int minMovableDistance;
+
+    [SerializeField]
+    private float obstacleDetectionRange;
+
+    [SerializeField]
+    protected int idleActionInterval;
+
+    [SerializeField]
+    protected AnimalHealth health;
+    
+    [SerializeField]
+    protected AnimalSight sight;
+    # endregion
+
+    # region Fields
+    protected Animator animator = null;
+
+    protected AudioSource audioSource = null;
+
     protected AnimalAnimation currentAnimation = AnimalAnimation.IDLE;
 
-    protected Vector3 terrainMinPosition;
-    protected Vector3 terrainMaxPosition;
-
-    private GameSettings gameLoader;
-    private Vector3 previousLocation;
-
-    protected Vector3 destination;
     protected bool destinationReached = true;
+
     protected bool fleeing = false;
 
-    protected float actionTimer;
-    protected float movementTimer;
-    protected float chaseTimer;
+    protected float actionTimer = 0;
+    
+    protected float chaseTimer = 0;
 
+    private float deathTimer = 0;
 
-    // Start is called before the first frame update
+    private CharacterController characterController = null;
+
+    private GameSettings gameLoader = null;
+
+    private Vector3 terrainMinPosition = new Vector3();
+
+    private Vector3 terrainMaxPosition = new Vector3();
+
+    private Vector3 destination = new Vector3();
+
+    private float movementTimer = 0;
+    # endregion
+
+    # region MonoBehaviour Methods
     void Start()
     {
-        TerrainManager terrainManager = GameObject.FindGameObjectWithTag("Terrain").GetComponent<TerrainManager>();
+        TerrainManager terrainManager = GameObject.
+            FindGameObjectWithTag("Terrain").GetComponent<TerrainManager>();
         terrainMinPosition = terrainManager.terrainMinPosition;
         terrainMaxPosition = terrainManager.terrainMaxPosition;
 
-        gameLoader = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameSettings>();
+        gameLoader = GameObject.FindGameObjectWithTag("GameController").
+            GetComponent<GameSettings>();
 
+        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        characterController = GetComponent<CharacterController>();
     }
+    # endregion
 
-    protected void ChangeDestination(GameObject target, float distanceMult)
-    {
-        if (target != null)
-        {
-                destination = target.transform.position;
-        }
-        else
-        {
-            do
-            {
-
-                int sign = Random.Range(0, 1f) > 0.5 ? 1 : -1;
-                int movableDistance = (int)(minMovableDistance * distanceMult);
-                float movableX = Mathf.Clamp(transform.position.x +  sign * Random.Range(minMovableDistance, movableDistance), terrainMinPosition.x, terrainMaxPosition.x);
-                sign = Random.Range(0, 1f) > 0.5 ? 1 : -1;
-                float movableZ = Mathf.Clamp(transform.position.z + sign * Random.Range(minMovableDistance, movableDistance), terrainMinPosition.z, terrainMaxPosition.z);
-                destination = new Vector3(movableX, 0, movableZ);
-
-            } while (CollisionDetected(destination - transform.position));
-
-        }
-
-        destinationReached = false;
-    }
-
-    protected void Turn()
-    {
-        Vector3 direction = destination - transform.position;
-        direction.y = 0;
-
-        Quaternion rotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, turnSpeed * Time.deltaTime);
-
-    }
-
+    # region Private Methods
     private bool CollisionDetected(Vector3 direction)
     {
         direction.y = 0;
@@ -110,7 +122,7 @@ public abstract class AnimalBehaviour : MonoBehaviour
         return false;
     }
 
-    protected void Move(float speed)
+    private void Move(float speed)
     {
         /*
         Vector3 direction = destination - transform.position;
@@ -123,7 +135,7 @@ public abstract class AnimalBehaviour : MonoBehaviour
         }
         else
         {
-            charController.Move(direction.normalized * speed);
+            characterController.Move(direction.normalized * speed);
             movementTimer += Time.deltaTime;
         }
         */
@@ -142,27 +154,58 @@ public abstract class AnimalBehaviour : MonoBehaviour
             destinationReached = true;
             Idle();
         }
-        else {
-
-            charController.SimpleMove(direction.normalized * speed);
+        else 
+        {
+            characterController.SimpleMove(direction.normalized * speed);
             movementTimer -= Time.deltaTime;
-
         }
-        
+    }
+    # endregion
+
+    # region Protected Methods
+    protected void ChangeDestination(GameObject target, float distanceMult)
+    {
+        if (target != null)
+            destination = target.transform.position;
+        else
+        {
+            do
+            {
+                int sign = Random.Range(0, 1f) > 0.5 ? 1 : -1;
+                int movableDistance = (int)(minMovableDistance * distanceMult);
+                float movableX = Mathf.Clamp(transform.position.x +  sign * Random.Range(minMovableDistance, movableDistance), terrainMinPosition.x, terrainMaxPosition.x);
+                sign = Random.Range(0, 1f) > 0.5 ? 1 : -1;
+                float movableZ = Mathf.Clamp(transform.position.z + sign * Random.Range(minMovableDistance, movableDistance), terrainMinPosition.z, terrainMaxPosition.z);
+                destination = new Vector3(movableX, 0, movableZ);
+
+            } while (CollisionDetected(destination - transform.position));
+        }
+
+        destinationReached = false;
     }
 
-    public void Flee()
+    protected void Turn()
+    {
+        Vector3 direction = destination - transform.position;
+        direction.y = 0;
+
+        Quaternion rotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, turnSpeed * Time.deltaTime);
+    }
+
+    protected void Flee()
     {
         if (destinationReached)
             ChangeDestination(null, 2f);
+        
         fleeing = true;
         Run();
-        
     }
 
-    public void Chase(GameObject target)
+    protected void Chase(GameObject target)
     {
         ChangeDestination(target, 1f);
+
         if (chaseTimer > 0)
         {
             Run();
@@ -172,43 +215,41 @@ public abstract class AnimalBehaviour : MonoBehaviour
         {
             Walk();
         }
-
     }
 
-
-    protected void Attack(bool isPlayer)
+    protected void Die()
     {
-        ChangeAnimation(AnimalAnimation.ATTACK);
-        destinationReached = true;
-        Turn();
-        if (isPlayer)
+        if (deathTimer == 0) // animal just died
         {
-            PlayerHealth playerHealth = reach.playerInRange.GetComponentInChildren<PlayerHealth>();
-        }
-        else 
-        {
-            AnimalHealth animalHealth = reach.herbivoreInRange.GetComponentInChildren<AnimalHealth>();
-            animalHealth.TakeDamageFrom(gameObject);
-        }
-    }
+            ChangeAnimation(AnimalAnimation.DIE); 
 
-    public void Die()
-    {
-        ChangeAnimation(AnimalAnimation.DIE);
-        if (GameObject.FindGameObjectWithTag("Player") == health.GetAttacker())
-            gameLoader.SubmitHuntedAnimal(animalType);
-        Destroy(gameObject, 30f);
+            if (health.LastAttackedBy.CompareTag("Player"))
+                gameLoader.SubmitHuntedAnimal(animalType);
+        }
+
+        if (deathTimer < deathDuration)
+        {
+            deathTimer += Time.deltaTime;
+        }
+        else
+        {
+            // allow animal to sink through ground
+            Physics.IgnoreCollision(
+                GameObject.FindGameObjectWithTag("Terrain").GetComponent<Collider>(),
+                this.GetComponent<Collider>()
+            );
+
+            if (this.transform.position.y > -5f)
+                this.transform.Translate(-Vector3.up * Time.deltaTime * dyingSpeed, Space.World);
+            else
+                Destroy(this.gameObject);
+        }
     }
 
     protected void Eat()
     {
         ChangeAnimation(AnimalAnimation.EAT);
         chaseTimer = idleActionInterval * 2;
-    }
-
-    protected void Howl()
-    {
-        ChangeAnimation(AnimalAnimation.HOWL);
     }
 
     protected void Idle()
@@ -231,9 +272,11 @@ public abstract class AnimalBehaviour : MonoBehaviour
         Turn();
         Move(runSpeed);
     }
+    # endregion
 
-    public abstract void RandomIdle();
+    # region Abstract Methods
+    protected abstract void RandomIdle();
 
-    public abstract void ChangeAnimation(AnimalAnimation newAnimation);
-    
+    protected abstract void ChangeAnimation(AnimalAnimation newAnimation);
+    # endregion
 }

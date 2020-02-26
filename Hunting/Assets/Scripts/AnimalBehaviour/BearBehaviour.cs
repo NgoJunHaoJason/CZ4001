@@ -1,48 +1,38 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class BearBehaviour : AnimalBehaviour
+
+public class BearBehaviour : AggressiveAnimalBehaviour
 {
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (currentAnimation == AnimalAnimation.DIE)
-            return;
-
-        if (health.IsDead())
+        if (health.IsDead)
         {
             Die();
         }
-        else if (health.IsRecentlyDamaged() && !sight.playerInRange)
+        else if (health.IsRecentlyDamaged() && !sight.HasPlayerInRange)
         {
             Flee();
         }
-        else if (reach.deadAnimalInRange)
+        else if (((CarnivoreReach) reach).HasDeadAnimalInRange)
         {
             Eat();
         }
-        else if (reach.herbivoreInRange)
+        else if (reach.HasPlayerInRange || ((CarnivoreReach) reach).HasHerbivoreInRange)
         {
-            Attack(false);
+            Attack(reach.HasPlayerInRange);  // prioritise attacking player
         }
-        else if (reach.playerInRange)
+        else if (sight.HasDeadAnimalInRange)
         {
-            Attack(true);
+            Chase(sight.DeadAnimalInRange);
         }
-        else if (sight.deadAnimalInRange)
+        else if (sight.HasHerbivoreInRange)
         {
-            Chase(sight.deadAnimalInRange);
+            Chase(sight.FirstHerbivoreInRange);
         }
-        else if (sight.herbivoresInRange.Count > 0)
+        else if (sight.HasPlayerInRange)
         {
-            Chase(sight.herbivoresInRange[0]);
+            Chase(sight.PlayerInRange);
         }
-        else if (sight.playerInRange)
-        {
-            Chase(sight.playerInRange);
-        }
-        
         else if (!destinationReached)
         {
             if (fleeing)
@@ -54,10 +44,9 @@ public class BearBehaviour : AnimalBehaviour
         {
             RandomIdle();
         }
-
     }
 
-    public override void RandomIdle()
+    protected override void RandomIdle()
     {
         if (actionTimer > 0)
         {
@@ -81,7 +70,7 @@ public class BearBehaviour : AnimalBehaviour
 
     }
 
-    public override void ChangeAnimation(AnimalAnimation newAnimation)
+    protected override void ChangeAnimation(AnimalAnimation newAnimation)
     {
         if (currentAnimation != newAnimation)
         {
