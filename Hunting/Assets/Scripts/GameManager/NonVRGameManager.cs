@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class TempGameManager : MonoBehaviour
+public class NonVRGameManager : MonoBehaviour
 {
     # region MonoBehaviour Methods
 

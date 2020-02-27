@@ -1021,8 +1021,12 @@ MonoBehaviour:
   idleActionInterval: 5
   health: {fileID: 4028171670079555939}
   sight: {fileID: 4028171669651284268}
+  childrenTransforms:
+  - {fileID: 4028171670079555936}
+  - {fileID: 4028171669814257230}
   reach: {fileID: 838169553202382193}
   attackInterval: 2
+  attackPower: 3
 --- !u!82 &4028171670874748023
 AudioSource:
   m_ObjectHideFlags: 0

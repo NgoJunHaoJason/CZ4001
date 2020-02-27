@@ -37,13 +37,14 @@ note - the following VR-related GameObjects are disabled in the hierarchy so tha
 
 before building for VR (for CZ4001 computer):
 
-- disable `Temp/TempPlayer`
-- disable `Temp/TempGameManager`
+- disable `NonVR`
 - enable `[VRTK_SDKManager]`
 - enable `[VRTK_Scripts]`
 - enable `HeadsetFollower`
 - enable `GameController/Bow`
 - set the `Render Camera` parameter for `HUDCanvas` to `[VRTK_SDKManager]/SteamVR/[CameraRig]/Camera (head)/Camera (eye)`
+
+in the Hierarchy.  
 
 when building for VR (for CZ4001 computer):
 

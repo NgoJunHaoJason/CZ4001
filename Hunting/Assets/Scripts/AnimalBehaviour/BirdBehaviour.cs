@@ -17,7 +17,7 @@ public class BirdBehaviour : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("hit by " + collision.gameObject.tag);
+        // Debug.Log("hit by " + collision.gameObject.tag);
         if (collision.gameObject.CompareTag("Arrow"))
         {
 
@@ -30,7 +30,7 @@ public class BirdBehaviour : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("hit by " + collision.gameObject.tag);
+        // Debug.Log("hit by " + collision.gameObject.tag);
         if (collision.gameObject.CompareTag("Arrow"))
         {
 
