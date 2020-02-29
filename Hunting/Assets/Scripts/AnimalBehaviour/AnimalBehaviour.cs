@@ -161,17 +161,22 @@ public abstract class AnimalBehaviour : MonoBehaviour
             //characterController.SimpleMove(direction.normalized * speed);
             movementTimer -= Time.deltaTime;
         }
+    }
+    # endregion
 
-        // quick hack to make sure that children game objects follow parent gameobject
+    # region Protected Methods
+    /// <summary>
+    /// quick hack to make sure that children game objects follow parent gameobject
+    /// </summary>
+    protected void PreventChildrenDetach()
+    {
         foreach (Transform childTransform in childrenTransforms)
         {
             childTransform.localPosition = Vector3.zero;
             childTransform.localRotation = Quaternion.identity;
         }
     }
-    # endregion
 
-    # region Protected Methods
     protected void ChangeDestination(GameObject target, float distanceMult)
     {
         if (target != null)
@@ -212,13 +217,6 @@ public abstract class AnimalBehaviour : MonoBehaviour
             rotation, 
             turnSpeed * Time.deltaTime
         );
-
-        // quick hack to make sure that children game objects follow parent gameobject
-        foreach (Transform childTransform in childrenTransforms)
-        {
-            childTransform.localPosition = Vector3.zero;
-            childTransform.localRotation = Quaternion.identity;
-        }
     }
 
     protected void Flee()
