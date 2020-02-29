@@ -5246,6 +5246,11 @@ PrefabInstance:
       propertyPath: meshGameObject
       value: 
       objectReference: {fileID: 1660546295}
+    - target: {fileID: 5934935938410392188, guid: d1b328f4a11cd0446b148217db5b2ce0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1b328f4a11cd0446b148217db5b2ce0, type: 3}
 --- !u!1001 &4168145505668610294
