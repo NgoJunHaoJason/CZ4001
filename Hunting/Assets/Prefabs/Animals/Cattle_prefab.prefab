@@ -554,7 +554,7 @@ GameObject:
   - component: {fileID: 6932881845231203475}
   - component: {fileID: 7181303287813894924}
   - component: {fileID: 2817520270922870364}
-  - component: {fileID: 8817478139228491786}
+  - component: {fileID: 2691026386989371185}
   m_Layer: 0
   m_Name: Cattle_prefab
   m_TagString: Cattle
@@ -780,7 +780,7 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!96 &8817478139228491786
+--- !u!96 &2691026386989371185
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
@@ -818,7 +818,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 5
+  m_Time: 7
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -835,8 +835,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.20218578
-        value: 0.45833334
+        time: 0.22950818
+        value: 0.5
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -844,8 +844,8 @@ TrailRenderer:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.65027314
-        value: 0.7916667
+        time: 0.7486338
+        value: 0.8194444
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -857,7 +857,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.41176474, g: 0.6901961, b: 0.98823535, a: 1}
+      key0: {r: 0.03644534, g: 0.52856034, b: 0.8584906, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
