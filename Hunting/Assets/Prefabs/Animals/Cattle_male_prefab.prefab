@@ -703,8 +703,12 @@ MonoBehaviour:
   idleActionInterval: 5
   health: {fileID: 4168145505112091067}
   sight: {fileID: 4168145505856579654}
+  childrenTransforms:
+  - {fileID: 4168145505112091066}
+  - {fileID: 4168145505071070522}
   reach: {fileID: 4168145503967034945}
   attackInterval: 2
+  attackPower: 2
 --- !u!82 &4168145505668610296
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1363,9 +1367,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4168145505071070525}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: -8.470329e-24, z: 0.00000007031196}
-  m_LocalScale: {x: 0.37014532, y: 0.37014532, z: 0.37014532}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.37014532, y: 0.37014556, z: 0.37014556}
   m_Children: []
   m_Father: {fileID: 4168145504452403454}
   m_RootOrder: 1

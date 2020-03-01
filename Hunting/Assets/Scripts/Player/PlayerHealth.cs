@@ -26,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
     # region Serialize Fields
 
     [SerializeField]
-    private int startingHealth = 100;
+    private int startingHealth = 10;
 
     [SerializeField]
     private Text healthValueText = null;
@@ -126,10 +126,6 @@ public class PlayerHealth : MonoBehaviour
         healthValueText.text = currentHealth.ToString();
 
         playerAudioSource.Play();
-
-        if (Debug.isDebugBuild)
-            Debug.Log("Player took damage and lost <color=Red>" + 
-                amount.ToString() + "</color> health.");
 
         if (currentHealth <= 0 && !isDead)
             Die();

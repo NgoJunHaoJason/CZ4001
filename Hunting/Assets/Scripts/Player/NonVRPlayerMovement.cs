@@ -7,7 +7,7 @@
 *   https://youtu.be/blO039OzUZc
 */
 [RequireComponent(typeof(Rigidbody))]
-public class TempPlayerMovement : MonoBehaviour
+public class NonVRPlayerMovement : MonoBehaviour
 {
     # region Serialize Fields
     [SerializeField]
