@@ -12,24 +12,24 @@ public class SunController : MonoBehaviour
     [SerializeField]
     private float currentTimeOfDay = 0.5f;
 
-    public float secondsInFullDay = 120f;
-    public float timeMultiplier = 0.5f;
+    private float secondsInFullDay = 120f;
+    private float timeMultiplier = 0.5f;
 
-    public MeshRenderer cloud;
+    private MeshRenderer cloud;
     
     # endregion
 
     # region Fields
 
 
-    private new Light sun;
-    private new float sunInitialIntensity;
+    private Light sun;
+    private float sunInitialIntensity;
 
-    private new Material high = null;
+    private Material high = null;
 
-    private new float r = 1f;
-    private new float g = 1f;
-    private new float b = 1f;
+    private float r = 1f;
+    private float g = 1f;
+    private float b = 1f;
 
 
     public System.Collections.Generic.List<Color> colors = new System.Collections.Generic.List<Color>();
@@ -56,7 +56,8 @@ public class SunController : MonoBehaviour
         
         currentTimeOfDay += (Time.deltaTime / secondsInFullDay) * timeMultiplier;
  
-        if (currentTimeOfDay >= 1) {
+        if (currentTimeOfDay >= 1) 
+	{
             currentTimeOfDay = 0;
         }
 
