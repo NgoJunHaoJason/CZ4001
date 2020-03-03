@@ -5,6 +5,8 @@ public class AggressiveHerbivoreBehaviour : AggressiveAnimalBehaviour
 {
     void FixedUpdate()
     {
+        PreventChildrenDetach();
+
         if (health.IsDead)
         {
             Die();

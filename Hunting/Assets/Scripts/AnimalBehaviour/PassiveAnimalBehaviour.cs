@@ -6,6 +6,8 @@ public class PassiveAnimalBehaviour : AnimalBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        PreventChildrenDetach();
+        
         if (health.IsDead)
         {
             Die();

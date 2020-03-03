@@ -5,6 +5,8 @@ public class WolfBehaviour : AggressiveAnimalBehaviour
 {
     void FixedUpdate()
     {
+        PreventChildrenDetach();
+        
         if (health.IsDead)
         {
             Die();
