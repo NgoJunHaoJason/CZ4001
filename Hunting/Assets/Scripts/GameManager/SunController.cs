@@ -12,9 +12,13 @@ public class SunController : MonoBehaviour
     [SerializeField]
     private float currentTimeOfDay = 0.5f;
 
+    [SerializeField]
     private float secondsInFullDay = 120f;
+
+    [SerializeField]
     private float timeMultiplier = 0.5f;
 
+    [SerializeField]
     private MeshRenderer cloud;
     
     # endregion
@@ -57,7 +61,7 @@ public class SunController : MonoBehaviour
         currentTimeOfDay += (Time.deltaTime / secondsInFullDay) * timeMultiplier;
  
         if (currentTimeOfDay >= 1) 
-	{
+	    {
             currentTimeOfDay = 0;
         }
 

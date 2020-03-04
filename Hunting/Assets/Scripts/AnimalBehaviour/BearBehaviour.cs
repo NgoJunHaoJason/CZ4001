@@ -5,6 +5,8 @@ public class BearBehaviour : AggressiveAnimalBehaviour
 {
     void FixedUpdate()
     {
+        PreventChildrenDetach();
+        
         if (health.IsDead)
         {
             Die();

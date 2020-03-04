@@ -1,32 +1,26 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 
 [RequireComponent(typeof(AudioSource))]
 public class PlayerHealth : MonoBehaviour
 {
-    # region Properties
-
+    #region Properties
     public bool IsDead { get => isDead; }
-
     #endregion
 
-    # region Fields
-
+    #region Fields
     private int currentHealth;
 
     private AudioSource playerAudioSource = null;
 
     private bool isDead = false;
     private bool isTakingDamage = false;
+    #endregion
 
-    # endregion
-
-    # region Serialize Fields
-
+    #region Serialize Fields
     [SerializeField]
-    private int startingHealth = 100;
+    private int startingHealth = 10;
 
     [SerializeField]
     private Text healthValueText = null;
@@ -46,45 +40,36 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private Image damageImage = null;
 
-    # endregion
+    [SerializeField]
+    private NonVRGameManager nonVRGameManager = null;
+    #endregion
 
-    # region MonoBehaviour Methods
-
-    void Awake()
+    #region MonoBehaviour Methods
+    private void Awake()
     {
-        playerAudioSource = GetComponent<AudioSource>();
+        playerAudioSource = this.GetComponent<AudioSource>();
         currentHealth = startingHealth;
 
         if (Debug.isDebugBuild)
         {
             if (healthValueText == null)
-                Debug.LogError(
-                    "Player healthValueText is not set in Unity editor", 
-                    healthValueText
-                );
+                Debug.LogError("HealthValueText is not set in Unity editor");
 
             if (healthSlider == null)
-                Debug.LogError(
-                    "Player healthSlider is not set in Unity editor", 
-                    healthSlider
-                );
+                Debug.LogError("HealthSlider is not set in Unity editor");
 
             if (deathAudioClip == null)
-                Debug.LogError(
-                    "Player deathAudioClip is not set in Unity editor", 
-                    deathAudioClip
-                );
+                Debug.LogError("DeathAudioClip is not set in Unity editor");
 
             if (damageImage == null)
-                Debug.LogError(
-                    "Player damageImage is not set in Unity editor", 
-                    damageImage
-                );
+                Debug.LogError("DamageImage is not set in Unity editor");
+
+            if (nonVRGameManager == null)
+                Debug.LogError("NonVRGameManager is not set in Unity editor");
         }
     }
 
-
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (isTakingDamage)
             damageImage.color = flashColour;
@@ -99,23 +84,26 @@ public class PlayerHealth : MonoBehaviour
         
         isTakingDamage = false;
     }
+    #endregion
 
-    # endregion
-
-    # region Private Methods
-
+    #region Private Methods
     private void Die()
     {
         isDead = true;
 
-        playerAudioSource.clip = deathAudioClip;
-        playerAudioSource.Play();
+        if (deathAudioClip != null)
+        {
+            playerAudioSource.clip = deathAudioClip;
+            playerAudioSource.Play();
+        }
+
+        // may be better to implement observer pattern using event-delegates
+        // not going to do it as there will only be 1 observer
+        nonVRGameManager.EndGame();
     }
+    #endregion
 
-    # endregion
-
-    # region Public Methods
-
+    #region Public Methods
     public void TakeDamage(int amount)
     {
         isTakingDamage = true;
@@ -127,19 +115,9 @@ public class PlayerHealth : MonoBehaviour
 
         playerAudioSource.Play();
 
-        if (Debug.isDebugBuild)
-            Debug.Log("Player took damage and lost <color=Red>" + 
-                amount.ToString() + "</color> health.");
-
         if (currentHealth <= 0 && !isDead)
             Die();
     }
-
-    public void RestartLevel()
-    {
-        SceneManager.LoadScene(0);
-    }
-
-    # endregion
+    #endregion
 }
 

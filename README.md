@@ -37,13 +37,14 @@ note - the following VR-related GameObjects are disabled in the hierarchy so tha
 
 before building for VR (for CZ4001 computer):
 
-- disable `Temp/TempPlayer`
-- disable `Temp/TempGameManager`
+- disable `NonVR`
 - enable `[VRTK_SDKManager]`
 - enable `[VRTK_Scripts]`
 - enable `HeadsetFollower`
 - enable `GameController/Bow`
 - set the `Render Camera` parameter for `HUDCanvas` to `[VRTK_SDKManager]/SteamVR/[CameraRig]/Camera (head)/Camera (eye)`
+
+in the Hierarchy.  
 
 when building for VR (for CZ4001 computer):
 
@@ -53,7 +54,10 @@ when building for VR (for CZ4001 computer):
 
 ## Resources used
 
-- [birds](https://assetstore.unity.com/packages/3d/characters/animals/living-birds-15649)
+- [living birds](https://assetstore.unity.com/packages/3d/characters/animals/living-birds-15649)
+- [Resonance Audio](https://resonance-audio.github.io/resonance-audio/develop/unity/getting-started.html)
+  - [v1.2.0 used](https://github.com/resonance-audio/resonance-audio-unity-sdk/releases/tag/v1.2.0) due to [bug in v1.2.1](https://github.com/resonance-audio/resonance-audio-unity-sdk/issues/51#issue-353082964)
+- [restart sprite](https://www.pngguru.com/free-transparent-background-png-clipart-bzxou/download)
 - [reticle sprite](https://www.hiclipart.com/free-transparent-background-png-clipart-mryvr)
 
 ## Miscellaneous

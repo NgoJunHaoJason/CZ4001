@@ -90,8 +90,18 @@ public class DeterministicAnimalSpawner : MonoBehaviour
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-        float movableX = Mathf.Clamp(player.transform.position.x + direction.x * range , terrainMinPosition.x, terrainMaxPosition.x);
-        float movableZ = Mathf.Clamp(player.transform.position.z + direction.y * range, terrainMinPosition.z, terrainMaxPosition.z);
+        float movableX = Mathf.Clamp(
+            player.transform.position.x + direction.x * range , 
+            terrainMinPosition.x, 
+            terrainMaxPosition.x
+        );
+
+        float movableZ = Mathf.Clamp(
+            player.transform.position.z + direction.y * range, 
+            terrainMinPosition.z, 
+            terrainMaxPosition.z
+        );
+
         destination = new Vector3(movableX, 0, movableZ);
 
         destinationReached = false;
@@ -159,8 +169,13 @@ public class DeterministicAnimalSpawner : MonoBehaviour
 
     private void Spawn(GameObject animal)
     {
-        Instantiate(animal, SpawnPoint.position, Quaternion.Euler(0,0,0));
-    }
-  
+        Vector3 spawnPosition = new Vector3(
+            SpawnPoint.position.x,
+            Terrain.activeTerrain.SampleHeight(SpawnPoint.position),
+            SpawnPoint.position.z
+        );
 
+        Debug.Log("spawning " + animal.name + " at " + SpawnPoint.position.ToString());
+        Instantiate(animal, spawnPosition, Quaternion.Euler(0,0,0));
+    }
 }
