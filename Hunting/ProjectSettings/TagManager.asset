@@ -28,6 +28,10 @@ TagManager:
   - Ibex
   - Rabbit
   - ShowOnPause
+  - lb_groundTarget
+  - lb_perchTarget
+  - windArea
+  - cloud
   layers:
   - Default
   - TransparentFX
