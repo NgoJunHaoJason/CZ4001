@@ -32,7 +32,7 @@ public class SunController : MonoBehaviour
     private float b = 1f;
 
 
-    public System.Collections.Generic.List<Color> colors = new System.Collections.Generic.List<Color>();
+    private System.Collections.Generic.List<Color> colors = new System.Collections.Generic.List<Color>();
 
     # endregion
 
